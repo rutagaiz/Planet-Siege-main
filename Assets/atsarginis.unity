@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 75092524}
   - component: {fileID: 75092525}
+  - component: {fileID: 75092526}
   m_Layer: 0
   m_Name: warrior-removebg-preview_0
   m_TagString: Untagged
@@ -206,6 +207,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &75092526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75092523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2fd214a87c87ff459ae4e2f861740ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crouchHeight: 0.5
 --- !u!1 &396691851
 GameObject:
   m_ObjectHideFlags: 0
