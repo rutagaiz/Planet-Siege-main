@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      warrior-removebg-preview_0: 3511933307750871715
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
