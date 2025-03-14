@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
+    [SerializeField]
+    float bullet_Damage;
+
     private Vector3 mousePos;
     private Camera mainCam;
     private Rigidbody2D rb;
@@ -30,5 +33,14 @@ public class BulletScript : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.TryGetComponent<Enemy_Stats>(out Enemy_Stats enemy))
+        {
+            enemy.TakeDamage(bullet_Damage);
+        }
+        Destroy(gameObject);
     }
 }
