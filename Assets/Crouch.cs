@@ -3,6 +3,8 @@ using UnityEngine;
 public class Crouch : MonoBehaviour
 {
     public float crouchHeight = 0.5f;
+    public Sprite idleSprite;
+    public Sprite crouchSprite;
     private Vector2 normalScale;
     private Vector2 normalColliderSize;
     private Vector2 normalColliderOffset;
@@ -10,11 +12,13 @@ public class Crouch : MonoBehaviour
     private bool facingRight = true;
 
     private BoxCollider2D boxCollider;
+    private SpriteRenderer spriteRenderer;
 
     void Start()
     {
 
         boxCollider = GetComponent<BoxCollider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         // Store visual model scale size 
         normalScale = transform.localScale;
@@ -30,6 +34,8 @@ public class Crouch : MonoBehaviour
 
         if (yInput < 0) // Crouching
         {
+            spriteRenderer.sprite = crouchSprite;
+
             // Reduce visual size of the model 
             transform.localScale = new Vector2(normalScale.x, crouchHeight);
 
@@ -39,6 +45,8 @@ public class Crouch : MonoBehaviour
         }
         else // Standing up
         {
+            spriteRenderer.sprite = idleSprite;
+
             // Return visual size of the model to the normal value
             transform.localScale = normalScale;
 
