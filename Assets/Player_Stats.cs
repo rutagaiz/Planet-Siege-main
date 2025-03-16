@@ -1,9 +1,12 @@
 using System.Linq.Expressions;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
     private Vector2 respawnPoint; // Stores the respawn position
+    public Slider slider;
+    public Slider slider1;
 
 
     [SerializeField]
@@ -12,6 +15,7 @@ public class PlayerStats : MonoBehaviour
     private void Start()
     {
         respawnPoint = transform.position; // Set initial spawn point
+        UpdateHealthUI();
     }
 
     private void OnEnable()
@@ -27,6 +31,7 @@ public class PlayerStats : MonoBehaviour
     {
         currentExperience += newExperience;
         Currency += newCurrency;
+        UpdateXpUI();
         if (currentExperience >= maxExperience)
         {
             LevelUp();
@@ -39,12 +44,15 @@ public class PlayerStats : MonoBehaviour
         currentExperience = 0;
         maxExperience += 100;
         currentLevel += 1;
+        UpdateHealthUI();
+        UpdateXpUI();
     }
 
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        UpdateHealthUI();
         if (currentHealth <= 0)
         {
             Die();
@@ -65,5 +73,21 @@ public class PlayerStats : MonoBehaviour
         currentHealth = maxHealth; // Restore health
         Debug.Log("Player respawned!");
 
+    }
+
+    private void UpdateHealthUI()
+    {
+        if (slider != null)
+        {
+            slider.value = (float)currentHealth;
+        }
+    }
+
+    private void UpdateXpUI()
+    {
+        if (slider1 != null)
+        {
+            slider1.value = (float)currentExperience;
+        }
     }
 }
