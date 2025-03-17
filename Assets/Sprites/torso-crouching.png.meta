@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      torso-crouching_0: -5816162876355912876
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

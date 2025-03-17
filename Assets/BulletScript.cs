@@ -2,16 +2,14 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    [SerializeField]
-    float bullet_Damage;
+    [SerializeField] float bullet_Damage = 10f;
+    [SerializeField] float lifetime = 3f; // Bullet disappears after this time
+    [SerializeField] float force = 20f;
 
     private Vector3 mousePos;
     private Camera mainCam;
     private Rigidbody2D rb;
-    public float force;
 
-    // Akvile
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         mainCam = Camera.main;
@@ -21,18 +19,14 @@ public class BulletScript : MonoBehaviour
         mousePos.z = 0;
         Vector3 direction = (mousePos - transform.position).normalized;
         
-        
         rb.linearVelocity = direction * force;
 
-        //So that the bullet rotates pagal kursoriaus kampa
+        // Rotate the bullet towards the cursor
         float rot = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rot);
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // Destroy bullet after lifetime if it doesn't hit anything
+        Destroy(gameObject, lifetime);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
