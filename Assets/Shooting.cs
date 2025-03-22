@@ -50,6 +50,17 @@ public class Shooting : MonoBehaviour
             currentAmmo--; // Reduce ammo count
             UpdateAmmoUI(); // Update UI
         }
+
+        if (mousePos.x < transform.position.x)
+        {
+            // Look left
+            transform.localScale = new Vector3(1, -1, 1); // arba (-1, 1, 1) jei norite tik horizontal flip
+        }
+        else
+        {
+            // Look right
+            transform.localScale = new Vector3(1, 1, 1);
+        }
     }
 
     // Update the UI text in "ammoLeft / maxAmmo" format
