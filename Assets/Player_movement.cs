@@ -9,6 +9,7 @@ public class Player_movement : MonoBehaviour
     public float flySpeed = 5f; // Fixed flying speed
     public float fallSpeed = 5f; // Fixed downward speed
     public float maxY = 11f; // Max Y position allowed
+    public CoinManager cm;
 
     void Update()
     {
@@ -55,5 +56,12 @@ public class Player_movement : MonoBehaviour
     void FlyDown()
     {
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, -fallSpeed); 
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Coin"))
+        {
+            cm.coinCount++;
+        }
     }
 }

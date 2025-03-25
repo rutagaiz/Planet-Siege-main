@@ -6,6 +6,7 @@ TagManager:
   tags:
   - EnemyTurret
   - PlayerBullet
+  - Coin
   layers:
   - Default
   - TransparentFX
