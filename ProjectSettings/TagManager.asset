@@ -4,6 +4,8 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - EnemyTurret
+  - PlayerBullet
   - Coin
   layers:
   - Default
@@ -12,9 +14,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - EnemyTower
+  - Player
+  - PlayerBullet
   - 
   - 
   - 
