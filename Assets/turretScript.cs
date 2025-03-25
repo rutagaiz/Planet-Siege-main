@@ -1,24 +1,22 @@
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
+﻿using System.Collections.Generic;
 using UnityEngine;
+
+public enum TurretFaction { Ally, Enemy }
 
 public class turretScript : MonoBehaviour
 {
     [Header("Turret Settings")]
-    public float Range;
-    public Transform Target;
-    public LayerMask playerLayer;
+    public TurretFaction turretFaction;
 
-    private bool Detected = false;
-    private Vector2 Direction;
+    public float Range;
+    public string[] targetTags;         
+    public LayerMask targetLayer;      
 
     public GameObject Gun;
     public GameObject Bullet;
-    public float FireRate;
+    public float FireRate = 1f;
     private float nextTimeToFire = 0;
     public Transform ShootPoint;
-
-    public float Force;
 
     [Header("Turret Stats")]
     [SerializeField] private int maxHealth = 50;
@@ -27,6 +25,9 @@ public class turretScript : MonoBehaviour
 
     private Collider2D col;
     private SpriteRenderer sr;
+
+    private Transform currentTarget;
+    private Vector2 direction;
 
     void Start()
     {
@@ -39,34 +40,69 @@ public class turretScript : MonoBehaviour
     {
         if (isDestroyed) return;
 
-        Vector2 targetPos = Target.position;
-        Direction = targetPos - (Vector2)transform.position;
+        currentTarget = GetNearestTarget();
 
-        // Debug ray
-        Debug.DrawRay(transform.position, Direction.normalized * Range, Color.red);
-
-        // Layer-masked raycast only for Player
-        RaycastHit2D rayInfo = Physics2D.Raycast(transform.position, Direction.normalized, Range, playerLayer);
-
-        if (rayInfo.collider != null && rayInfo.collider.CompareTag("Player"))
+        if (currentTarget != null)
         {
-            Detected = true;
-        }
-        else
-        {
-            Detected = false;
-        }
+            direction = (currentTarget.position - transform.position).normalized;
 
-        if (Detected)
-        {
-            Gun.transform.right = Direction;
+         
+            Vector2 origin = (Vector2)transform.position + direction * 0.1f;
 
-            if (Time.time > nextTimeToFire)
+            RaycastHit2D hit = Physics2D.Raycast(origin, direction, Range, targetLayer);
+
+            if (hit.collider != null && MatchesTargetTags(hit.collider.tag) && hit.transform == currentTarget)
             {
-                nextTimeToFire = Time.time + 1f / FireRate;
-                Shoot();
+                Gun.transform.right = direction;
+
+                if (Time.time > nextTimeToFire)
+                {
+                    nextTimeToFire = Time.time + 1f / FireRate;
+                    Shoot();
+                }
             }
+
+            Debug.DrawRay(origin, direction * Range, Color.red);
         }
+     
+            if (isDestroyed) return;
+
+            currentTarget = GetNearestTarget();
+
+            if (currentTarget != null)
+            {
+                direction = (currentTarget.position - transform.position).normalized;
+                Debug.Log("🔍 Found a target: " + currentTarget.name);
+
+                Vector2 origin = (Vector2)transform.position + direction * 0.1f;
+                RaycastHit2D hit = Physics2D.Raycast(origin, direction, Range, targetLayer);
+
+                if (hit.collider != null)
+                {
+                    Debug.Log("👁 Raycast hit: " + hit.collider.name + " | Tag: " + hit.collider.tag);
+                }
+
+                if (hit.collider != null && MatchesTargetTags(hit.collider.tag) && hit.transform == currentTarget)
+                {
+                    Debug.Log("✅ Valid target in line of sight: " + hit.collider.name);
+
+                    Gun.transform.right = direction;
+
+                    if (Time.time > nextTimeToFire)
+                    {
+                        Debug.Log("💥 Turret shooting at: " + currentTarget.name);
+                        nextTimeToFire = Time.time + 1f / FireRate;
+                        Shoot();
+                    }
+                }
+
+                Debug.DrawRay(origin, direction * Range, Color.red);
+            }
+            else
+            {
+                Debug.Log("🚫 No valid target found in range.");
+            }
+        
     }
 
     void Shoot()
@@ -76,7 +112,8 @@ public class turretScript : MonoBehaviour
         TurretBullet bulletScript = bulletIns.GetComponent<TurretBullet>();
         if (bulletScript != null)
         {
-            bulletScript.SetDirection(Direction);
+            bulletScript.SetDirection(direction);
+            bulletScript.SetFaction(turretFaction);
         }
     }
 
@@ -95,9 +132,7 @@ public class turretScript : MonoBehaviour
     private void Die()
     {
         isDestroyed = true;
-        Debug.Log("Turret destroyed!");
-
-        Detected = false;
+        Debug.Log($"{turretFaction} turret destroyed!");
 
         if (sr != null) sr.color = Color.gray;
         if (col != null) col.enabled = false;
@@ -105,8 +140,43 @@ public class turretScript : MonoBehaviour
         Destroy(gameObject, 1.5f);
     }
 
+    private Transform GetNearestTarget()
+    {
+        List<GameObject> allTargets = new();
+
+        foreach (string tag in targetTags)
+        {
+            allTargets.AddRange(GameObject.FindGameObjectsWithTag(tag));
+        }
+
+        float minDistance = Mathf.Infinity;
+        Transform nearest = null;
+
+        foreach (GameObject obj in allTargets)
+        {
+            float distance = Vector2.Distance(transform.position, obj.transform.position);
+            if (distance < minDistance && distance <= Range)
+            {
+                minDistance = distance;
+                nearest = obj.transform;
+            }
+        }
+
+        return nearest;
+    }
+
+    private bool MatchesTargetTags(string tag)
+    {
+        foreach (string t in targetTags)
+        {
+            if (t == tag) return true;
+        }
+        return false;
+    }
+
     void OnDrawGizmosSelected()
     {
+        Gizmos.color = turretFaction == TurretFaction.Ally ? Color.green : Color.red;
         Gizmos.DrawWireSphere(transform.position, Range);
     }
 }
