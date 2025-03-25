@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class TurretBullet : MonoBehaviour
 {
+    public enum BulletFaction { Ally, Enemy }
+    private BulletFaction bulletFaction;
+
     [SerializeField] private float bulletDamage = 10f;
     [SerializeField] private float lifetime = 3f;
     [SerializeField] private float speed = 10f;
@@ -9,10 +12,14 @@ public class TurretBullet : MonoBehaviour
     private Vector2 direction;
     private Rigidbody2D rb;
 
-    // Call this from the turret when instantiating the bullet
     public void SetDirection(Vector2 dir)
     {
         direction = dir.normalized;
+    }
+
+    public void SetFaction(TurretFaction turretFaction)
+    {
+        bulletFaction = turretFaction == TurretFaction.Ally ? BulletFaction.Ally : BulletFaction.Enemy;
     }
 
     void Start()
@@ -21,13 +28,11 @@ public class TurretBullet : MonoBehaviour
 
         if (direction == Vector2.zero)
         {
-            Debug.LogWarning("Bullet direction was not set. Defaulting to right.");
             direction = Vector2.right;
         }
 
         rb.linearVelocity = direction * speed;
 
-        // Optional: rotate the bullet to face the direction it's moving
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
 
@@ -36,18 +41,41 @@ public class TurretBullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (bulletFaction == BulletFaction.Enemy)
         {
-            if (collision.gameObject.TryGetComponent<PlayerStats>(out PlayerStats player))
+            if (collision.gameObject.CompareTag("Player"))
             {
-                player.TakeDamage((int)bulletDamage);
+                if (collision.gameObject.TryGetComponent<PlayerStats>(out PlayerStats player))
+                {
+                    player.TakeDamage((int)bulletDamage);
+                }
             }
-
-            Destroy(gameObject); // destroy bullet on impact
+            else if (collision.gameObject.CompareTag("AllyUnits") || collision.gameObject.CompareTag("AllyTurret"))
+            {
+                if (collision.gameObject.TryGetComponent<turretScript>(out turretScript allyTurret))
+                {
+                    allyTurret.TakeDamage((int)bulletDamage);
+                }
+            }
         }
-    }
-    void Update()
-    {
-        
+        else if (bulletFaction == BulletFaction.Ally)
+        {
+            if (collision.gameObject.CompareTag("EnemyUnits"))
+            {
+                if (collision.gameObject.TryGetComponent<Enemy_Stats>(out Enemy_Stats enemy))
+                {
+                    enemy.TakeDamage((int)bulletDamage);
+                }
+            }
+            else if (collision.gameObject.CompareTag("EnemyTurret"))
+            {
+                if (collision.gameObject.TryGetComponent<turretScript>(out turretScript enemyTurret))
+                {
+                    enemyTurret.TakeDamage((int)bulletDamage);
+                }
+            }
+        }
+
+        Destroy(gameObject);
     }
 }
