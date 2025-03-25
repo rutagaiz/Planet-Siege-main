@@ -9,8 +9,8 @@ public class turretScript : MonoBehaviour
     public TurretFaction turretFaction;
 
     public float Range;
-    public string[] targetTags;         
-    public LayerMask targetLayer;      
+    public string[] targetTags;
+    public LayerMask targetLayer;
 
     public GameObject Gun;
     public GameObject Bullet;
@@ -29,24 +29,40 @@ public class turretScript : MonoBehaviour
     private Transform currentTarget;
     private Vector2 direction;
 
+    [Header("Repair Settings")]
+    public bool isRepairing = false;
+    public float repairCooldown = 10f;
+    public float repairDuration = 3f;
+    public int repairCost = 10;
+    public int repairAmount = 20;
+    public float repairRange = 2f;
+    private float lastRepairTime = -Mathf.Infinity;
+    private Transform playerTransform;
+
     void Start()
     {
         currentHealth = maxHealth;
         col = GetComponent<Collider2D>();
         sr = GetComponent<SpriteRenderer>();
+
+        playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
     }
 
     void Update()
     {
         if (isDestroyed) return;
 
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            TakeDamage(15);
+            Debug.Log("☠️ Turret manually damaged for 15 HP.");
+        }
+
         currentTarget = GetNearestTarget();
 
         if (currentTarget != null)
         {
             direction = (currentTarget.position - transform.position).normalized;
-
-         
             Vector2 origin = (Vector2)transform.position + direction * 0.1f;
 
             RaycastHit2D hit = Physics2D.Raycast(origin, direction, Range, targetLayer);
@@ -64,45 +80,12 @@ public class turretScript : MonoBehaviour
 
             Debug.DrawRay(origin, direction * Range, Color.red);
         }
-     
-            if (isDestroyed) return;
 
-            currentTarget = GetNearestTarget();
-
-            if (currentTarget != null)
-            {
-                direction = (currentTarget.position - transform.position).normalized;
-                Debug.Log("🔍 Found a target: " + currentTarget.name);
-
-                Vector2 origin = (Vector2)transform.position + direction * 0.1f;
-                RaycastHit2D hit = Physics2D.Raycast(origin, direction, Range, targetLayer);
-
-                if (hit.collider != null)
-                {
-                    Debug.Log("👁 Raycast hit: " + hit.collider.name + " | Tag: " + hit.collider.tag);
-                }
-
-                if (hit.collider != null && MatchesTargetTags(hit.collider.tag) && hit.transform == currentTarget)
-                {
-                    Debug.Log("✅ Valid target in line of sight: " + hit.collider.name);
-
-                    Gun.transform.right = direction;
-
-                    if (Time.time > nextTimeToFire)
-                    {
-                        Debug.Log("💥 Turret shooting at: " + currentTarget.name);
-                        nextTimeToFire = Time.time + 1f / FireRate;
-                        Shoot();
-                    }
-                }
-
-                Debug.DrawRay(origin, direction * Range, Color.red);
-            }
-            else
-            {
-                Debug.Log("🚫 No valid target found in range.");
-            }
-        
+        // 🔧 Test repair key (R) with proximity
+        if (turretFaction == TurretFaction.Ally && Input.GetKeyDown(KeyCode.R))
+        {
+            TryRepair();
+        }
     }
 
     void Shoot()
@@ -174,9 +157,51 @@ public class turretScript : MonoBehaviour
         return false;
     }
 
+    public void TryRepair()
+    {
+        if (turretFaction != TurretFaction.Ally) return;
+        if (isDestroyed || currentHealth >= maxHealth || isRepairing) return;
+
+        if (Time.time < lastRepairTime + repairCooldown)
+        {
+            Debug.Log("⏳ Repair cooldown active.");
+            return;
+        }
+
+        if (playerTransform == null || Vector2.Distance(transform.position, playerTransform.position) > repairRange)
+        {
+            Debug.Log("🚫 Player is too far to repair this turret.");
+            return;
+        }
+
+        if (!PlayerStats.Instance.SpendCurrency(repairCost))
+        {
+            Debug.Log("❌ Not enough currency.");
+            return;
+        }
+
+        StartCoroutine(RepairProcess());
+    }
+
+    private System.Collections.IEnumerator RepairProcess()
+    {
+        isRepairing = true;
+        Debug.Log("🔧 Repairing...");
+
+        yield return new WaitForSeconds(repairDuration);
+
+        currentHealth = Mathf.Min(currentHealth + repairAmount, maxHealth);
+        lastRepairTime = Time.time;
+        isRepairing = false;
+
+        Debug.Log("✅ Repaired! Health: " + currentHealth + "/" + maxHealth);
+    }
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = turretFaction == TurretFaction.Ally ? Color.green : Color.red;
         Gizmos.DrawWireSphere(transform.position, Range);
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, repairRange);
     }
 }
