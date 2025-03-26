@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public enum TurretFaction { Ally, Enemy }
 
@@ -39,13 +42,31 @@ public class turretScript : MonoBehaviour
     private float lastRepairTime = -Mathf.Infinity;
     private Transform playerTransform;
 
+    [Header("UI References")]
+    public GameObject healthBarPrefab;
+    private GameObject towerHPUI;
+    private Slider healthSlider;
+    private TextMeshProUGUI healthText;
+
+    void Awake()
+    {
+        CreateHealthBar();
+    }
+
     void Start()
     {
         currentHealth = maxHealth;
         col = GetComponent<Collider2D>();
         sr = GetComponent<SpriteRenderer>();
-
         playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
+
+        if (healthSlider != null)
+        {
+            healthSlider.maxValue = maxHealth;
+            healthSlider.value = currentHealth;
+        }
+
+        UpdateHealthUI();
     }
 
     void Update()
@@ -81,7 +102,6 @@ public class turretScript : MonoBehaviour
             Debug.DrawRay(origin, direction * Range, Color.red);
         }
 
-        // 🔧 Test repair key (R) with proximity
         if (turretFaction == TurretFaction.Ally && Input.GetKeyDown(KeyCode.R))
         {
             TryRepair();
@@ -105,6 +125,9 @@ public class turretScript : MonoBehaviour
         if (isDestroyed) return;
 
         currentHealth -= damage;
+        currentHealth = Mathf.Max(currentHealth, 0);
+
+        UpdateHealthUI();
 
         if (currentHealth <= 0)
         {
@@ -183,7 +206,7 @@ public class turretScript : MonoBehaviour
         StartCoroutine(RepairProcess());
     }
 
-    private System.Collections.IEnumerator RepairProcess()
+    private IEnumerator RepairProcess()
     {
         isRepairing = true;
         Debug.Log("🔧 Repairing...");
@@ -194,7 +217,44 @@ public class turretScript : MonoBehaviour
         lastRepairTime = Time.time;
         isRepairing = false;
 
+        UpdateHealthUI();
+
         Debug.Log("✅ Repaired! Health: " + currentHealth + "/" + maxHealth);
+    }
+
+    private void UpdateHealthUI()
+    {
+        if (healthSlider != null)
+            healthSlider.value = currentHealth;
+
+        if (healthText != null)
+            healthText.text = $"{currentHealth} / {maxHealth}";
+    }
+
+    private void CreateHealthBar()
+    {
+        if (healthBarPrefab == null) return;
+
+        GameObject canvasInstance = Instantiate(healthBarPrefab, transform);
+        towerHPUI = canvasInstance.transform.Find("TowerHP")?.gameObject;
+
+        healthSlider = towerHPUI?.GetComponentInChildren<Slider>();
+        healthText = towerHPUI?.GetComponentInChildren<TextMeshProUGUI>();
+
+        if (towerHPUI != null)
+            towerHPUI.SetActive(false);
+    }
+
+    void OnMouseEnter()
+    {
+        if (towerHPUI != null)
+            towerHPUI.SetActive(true);
+    }
+
+    void OnMouseExit()
+    {
+        if (towerHPUI != null)
+            towerHPUI.SetActive(false);
     }
 
     void OnDrawGizmosSelected()
