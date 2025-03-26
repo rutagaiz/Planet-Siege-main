@@ -907,6 +907,7 @@ MonoBehaviour:
   repairCost: 10
   repairAmount: 20
   repairRange: 2
+  healthBarPrefab: {fileID: 0}
 --- !u!60 &285744069
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1188,6 +1189,7 @@ MonoBehaviour:
   repairCost: 0
   repairAmount: 0
   repairRange: 0
+  healthBarPrefab: {fileID: 102170849489981937, guid: 3a7ceeea802c2a64e914fbeae89d210c, type: 3}
 --- !u!60 &328466651
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1891,6 +1893,7 @@ MonoBehaviour:
   repairCost: 10
   repairAmount: 20
   repairRange: 5
+  healthBarPrefab: {fileID: 102170849489981937, guid: 3a7ceeea802c2a64e914fbeae89d210c, type: 3}
 --- !u!60 &493078959
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -2131,6 +2134,7 @@ MonoBehaviour:
   repairCost: 0
   repairAmount: 0
   repairRange: 0
+  healthBarPrefab: {fileID: 102170849489981937, guid: 3a7ceeea802c2a64e914fbeae89d210c, type: 3}
 --- !u!60 &501661363
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -3381,6 +3385,7 @@ MonoBehaviour:
   repairCost: 0
   repairAmount: 0
   repairRange: 0
+  healthBarPrefab: {fileID: 102170849489981937, guid: 3a7ceeea802c2a64e914fbeae89d210c, type: 3}
 --- !u!60 &717496344
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -16164,6 +16169,7 @@ MonoBehaviour:
   repairCost: 10
   repairAmount: 20
   repairRange: 5
+  healthBarPrefab: {fileID: 102170849489981937, guid: 3a7ceeea802c2a64e914fbeae89d210c, type: 3}
 --- !u!60 &776138860
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -17029,6 +17035,7 @@ MonoBehaviour:
   repairCost: 10
   repairAmount: 20
   repairRange: 2
+  healthBarPrefab: {fileID: 0}
 --- !u!60 &870030991
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -17477,6 +17484,7 @@ MonoBehaviour:
   repairCost: 10
   repairAmount: 20
   repairRange: 5
+  healthBarPrefab: {fileID: 102170849489981937, guid: 3a7ceeea802c2a64e914fbeae89d210c, type: 3}
 --- !u!60 &894962285
 PolygonCollider2D:
   m_ObjectHideFlags: 0
