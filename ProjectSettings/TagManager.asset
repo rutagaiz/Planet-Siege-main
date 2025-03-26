@@ -4,7 +4,10 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - EnemyTurret
+  - PlayerBullet
   - Coin
+  - AllyTower
   layers:
   - Default
   - TransparentFX
@@ -12,12 +15,12 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - EnemyTower
+  - Player
+  - PlayerBullet
+  - AllyTower
+  - AllyUnits
+  - EnemyUnits
   - 
   - 
   - 
