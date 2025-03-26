@@ -229,6 +229,13 @@ public class turretScript : MonoBehaviour
 
         if (healthText != null)
             healthText.text = $"{currentHealth} / {maxHealth}";
+
+        // Reset the rotation and scale of the UI to prevent flipping
+        if (towerHPUI != null)
+        {
+            towerHPUI.transform.rotation = Quaternion.identity;
+            towerHPUI.transform.localScale = new Vector3(2, 2, 1);
+        }
     }
 
     private void CreateHealthBar()

@@ -8,6 +8,7 @@ TagManager:
   - PlayerBullet
   - Coin
   - AllyTower
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - AllyTower
   - AllyUnits
   - EnemyUnits
-  - 
+  - EnemyBullet
   - 
   - 
   - 
