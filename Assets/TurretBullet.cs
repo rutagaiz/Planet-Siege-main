@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TurretBullet : MonoBehaviour
 {
@@ -41,41 +41,39 @@ public class TurretBullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (bulletFaction == BulletFaction.Enemy)
+        Debug.Log($"🔍 Bullet collided with: {collision.gameObject.name} (Tag: {collision.gameObject.tag})");
+        // Jei kulka pataikė į objektą su turretScript
+        if (collision.gameObject.TryGetComponent<turretScript>(out turretScript turret))
         {
-            if (collision.gameObject.CompareTag("Player"))
+            // Patikriname ar kulkos frakcija priešinga bokšto frakcijai
+            if ((bulletFaction == BulletFaction.Ally && turret.turretFaction == TurretFaction.Enemy) ||
+                (bulletFaction == BulletFaction.Enemy && turret.turretFaction == TurretFaction.Ally))
             {
-                if (collision.gameObject.TryGetComponent<PlayerStats>(out PlayerStats player))
-                {
-                    player.TakeDamage((int)bulletDamage);
-                }
-            }
-            else if (collision.gameObject.CompareTag("AllyUnits") || collision.gameObject.CompareTag("AllyTurret"))
-            {
-                if (collision.gameObject.TryGetComponent<turretScript>(out turretScript allyTurret))
-                {
-                    allyTurret.TakeDamage((int)bulletDamage);
-                }
-            }
-        }
-        else if (bulletFaction == BulletFaction.Ally)
-        {
-            if (collision.gameObject.CompareTag("EnemyUnits"))
-            {
-                if (collision.gameObject.TryGetComponent<Enemy_Stats>(out Enemy_Stats enemy))
-                {
-                    enemy.TakeDamage((int)bulletDamage);
-                }
-            }
-            else if (collision.gameObject.CompareTag("EnemyTurret"))
-            {
-                if (collision.gameObject.TryGetComponent<turretScript>(out turretScript enemyTurret))
-                {
-                    enemyTurret.TakeDamage((int)bulletDamage);
-                }
+                turret.TakeDamage((int)bulletDamage);
+                
             }
         }
 
-        Destroy(gameObject);
+        // Jei pataikė į žaidėją
+        if (bulletFaction == BulletFaction.Enemy && collision.gameObject.CompareTag("Player"))
+        {
+            if (collision.gameObject.TryGetComponent<PlayerStats>(out PlayerStats player))
+            {
+                player.TakeDamage((int)bulletDamage);
+                Debug.Log($"💥 Player hit for {bulletDamage}");
+            }
+        }
+
+        // Jei pataikė į priešą
+        if (bulletFaction == BulletFaction.Ally && collision.gameObject.CompareTag("EnemyUnits"))
+        {
+            if (collision.gameObject.TryGetComponent<Enemy_Stats>(out Enemy_Stats enemy))
+            {
+                enemy.TakeDamage((int)bulletDamage);
+                Debug.Log($"💥 Enemy unit hit for {bulletDamage}");
+            }
+        }
+
+        Destroy(gameObject); // sunaikinam kulką
     }
 }
