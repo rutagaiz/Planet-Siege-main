@@ -16,6 +16,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField]
     int currentHealth, maxHealth, currentExperience, maxExperience, currentLevel, attackDamage, Speed, skillPoints;
 
+    public GameOverScreen GameOverScreen;
+
     private void Awake()
     {
         Instance = this;
@@ -69,6 +71,7 @@ public class PlayerStats : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die();
+            GameOverScreen.Setup();
         }
     }
 
