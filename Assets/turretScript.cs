@@ -48,6 +48,10 @@ public class turretScript : MonoBehaviour
     private Slider healthSlider;
     private TextMeshProUGUI healthText;
 
+    // Victory / Defeat UI
+    public GameOverScreen GameOverScreen;
+    public Victory_screen Victory_Screen;
+
     void Awake()
     {
         CreateHealthBar();
@@ -106,6 +110,9 @@ public class turretScript : MonoBehaviour
         {
             TryRepair();
         }
+        // Screenai
+        VictoryScreen();
+        DefeatScreen();
     }
 
     void Shoot()
@@ -270,5 +277,19 @@ public class turretScript : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, Range);
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position, repairRange);
+    }
+    void VictoryScreen()
+    {
+        if (GameObject.FindGameObjectWithTag("EnemyBase") == null)
+        {
+            Victory_Screen.Setup();
+        }
+    }
+    void DefeatScreen()
+    {
+        if (GameObject.FindGameObjectWithTag("AllyBase") == null)
+        {
+            GameOverScreen.Setup();
+        }
     }
 }
