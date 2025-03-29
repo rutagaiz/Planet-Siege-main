@@ -4,17 +4,28 @@ using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
-    private Vector2 respawnPoint; // Stores the respawn position
+    public static PlayerStats Instance;
+
+    private Vector2 respawnPoint;
     public Slider slider;
     public Slider slider1;
 
+    [SerializeField]
+    public int Currency = 100;
 
     [SerializeField]
-    int currentHealth, maxHealth, currentExperience, maxExperience, currentLevel, attackDamage, Speed, Currency, skillPoints;
+    int currentHealth, maxHealth, currentExperience, maxExperience, currentLevel, attackDamage, Speed, skillPoints;
+
+    public GameOverScreen GameOverScreen;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
-        respawnPoint = transform.position; // Set initial spawn point
+        respawnPoint = transform.position;
         UpdateHealthUI();
     }
 
@@ -22,6 +33,7 @@ public class PlayerStats : MonoBehaviour
     {
         ExperienceManager.Instance.OnChange += HandleChange;
     }
+
     private void OnDisable()
     {
         ExperienceManager.Instance.OnChange -= HandleChange;
@@ -32,11 +44,13 @@ public class PlayerStats : MonoBehaviour
         currentExperience += newExperience;
         Currency += newCurrency;
         UpdateXpUI();
+
         if (currentExperience >= maxExperience)
         {
             LevelUp();
         }
     }
+
     private void LevelUp()
     {
         skillPoints += 1;
@@ -53,33 +67,32 @@ public class PlayerStats : MonoBehaviour
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         UpdateHealthUI();
+
         if (currentHealth <= 0)
         {
             Die();
+            GameOverScreen.Setup();
         }
     }
 
     private void Die()
     {
         Debug.Log("Player has died!");
-        // DEATH LOGIC <...>
-
         Respawn();
     }
 
     private void Respawn()
     {
-        transform.position = respawnPoint; // Move player to respawn point
-        currentHealth = maxHealth; // Restore health
+        transform.position = respawnPoint;
+        currentHealth = maxHealth;
         Debug.Log("Player respawned!");
-
     }
 
     private void UpdateHealthUI()
     {
         if (slider != null)
         {
-            slider.value = (float)currentHealth;
+            slider.value = currentHealth;
         }
     }
 
@@ -87,7 +100,23 @@ public class PlayerStats : MonoBehaviour
     {
         if (slider1 != null)
         {
-            slider1.value = (float)currentExperience;
+            slider1.value = currentExperience;
         }
+    }
+
+
+    public bool SpendCurrency(int amount)
+    {
+        if (Currency >= amount)
+        {
+            Currency -= amount;
+            return true;
+        }
+        return false;
+    }
+
+    public void AddCurrency(int amount)
+    {
+        Currency += amount;
     }
 }
