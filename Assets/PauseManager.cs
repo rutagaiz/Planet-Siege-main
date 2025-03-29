@@ -5,59 +5,105 @@ public class PauseManager : MonoBehaviour
 {
     public GameObject pauseMenu;
     public GameObject spawnCanvas;
-    private bool isPaused = false;
     public MonoBehaviour[] playerScriptsToDisable;
+
+    public static bool isPaused { get; private set; }
+
+    void Awake()
+    {
+        isPaused = false;
+        Time.timeScale = 1f;
+
+        if (pauseMenu != null)
+        {
+            pauseMenu.SetActive(false); //  Make sure it's hidden at start
+        }
+
+        if (spawnCanvas != null)
+        {
+            spawnCanvas.SetActive(true); //  Ensure gameplay UI is visible
+        }
+
+        EnsureUIState();
+    }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (isPaused)
-            {
-                ResumeGame();
-            }
-            else
-            {
-                PauseGame();
-            }
+            TogglePause();
         }
     }
 
-    void Start()
+    void EnsureUIState()
     {
-        spawnCanvas.SetActive(true);
-        pauseMenu.SetActive(false);
+        if (pauseMenu) pauseMenu.SetActive(isPaused);
+        if (spawnCanvas) spawnCanvas.SetActive(!isPaused);
     }
 
-    public void PauseGame()
+    public void TogglePause()
     {
-        isPaused = true;
-        Time.timeScale = 0f;
-        pauseMenu.SetActive(true);
-        spawnCanvas.SetActive(false);
+        isPaused = !isPaused;
+        Time.timeScale = isPaused ? 0f : 1f;
 
+        // Force UI update immediately
+        if (pauseMenu != null)
+        {
+            pauseMenu.SetActive(isPaused);
+        }
+
+        if (spawnCanvas != null)
+        {
+            spawnCanvas.SetActive(!isPaused);
+        }
+
+        //  Ensure scripts are enabled/disabled correctly
         foreach (var script in playerScriptsToDisable)
         {
-            script.enabled = false;
+            if (script != null)
+            {
+                script.enabled = !isPaused;
+            }
+        }
+
+        // Force stats update when paused
+        if (isPaused && pauseMenu != null)
+        {
+            var stats = pauseMenu.GetComponent<PauseMenuStats>();
+            if (stats != null)
+            {
+                stats.UpdateStats();
+            }
         }
     }
+
+
 
     public void ResumeGame()
     {
-        isPaused = false;
-        Time.timeScale = 1f;
-        pauseMenu.SetActive(false);
-        spawnCanvas.SetActive(true);
-
-        foreach (var script in playerScriptsToDisable)
+        if (isPaused)
         {
-            script.enabled = true;
+            TogglePause(); // Unpauses the game
         }
     }
 
     public void RestartLevel()
     {
+        // Reset state before reload
+        isPaused = false;
         Time.timeScale = 1f;
+
+        // Clear any potential duplicate GameManager
+        var gameManagers = FindObjectsOfType<GameManager>();
+        foreach (var gm in gameManagers)
+        {
+            if (gm != GameManager.Instance)
+            {
+                Destroy(gm.gameObject);
+            }
+        }
+
+        GameManager.Instance.ResetAllStats();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

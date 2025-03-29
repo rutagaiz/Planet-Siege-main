@@ -140,6 +140,11 @@ public class turretScript : MonoBehaviour
         isDestroyed = true;
         Debug.Log($"{turretFaction} turret destroyed!");
 
+        if (turretFaction == TurretFaction.Enemy)
+        {
+            GameManager.Instance.AddTowerDestroyed();
+        }
+
         if (sr != null) sr.color = Color.gray;
         if (col != null) col.enabled = false;
 
@@ -230,7 +235,7 @@ public class turretScript : MonoBehaviour
         if (healthText != null)
             healthText.text = $"{currentHealth} / {maxHealth}";
 
-
+        // Reset the rotation and scale of the UI to prevent flipping
         if (towerHPUI != null)
         {
             towerHPUI.transform.rotation = Quaternion.identity;

@@ -34,6 +34,7 @@ public class Enemy_Stats : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
-        ExperienceManager.Instance.Add(expAmount,currencyAmount);
+        ExperienceManager.Instance.Add(expAmount, currencyAmount);
+        GameManager.Instance.AddEnemyDefeated(); // Notify stats manager
     }
 }

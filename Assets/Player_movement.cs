@@ -9,7 +9,7 @@ public class Player_movement : MonoBehaviour
     public float flySpeed = 5f;
     public float fallSpeed = 5f;
     public float maxY = 11f;
-    public CoinManager cm;
+    public GameManager cm;
 
     // References to sprite renderers
     private SpriteRenderer playerSpriteRenderer;
@@ -108,7 +108,8 @@ public class Player_movement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Coin"))
         {
-            cm.coinCount++;
+            GameManager.Instance.AddCoin(1); 
+            //Destroy(other.gameObject);      
         }
     }
 }
