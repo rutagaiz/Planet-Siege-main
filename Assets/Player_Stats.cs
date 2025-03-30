@@ -37,13 +37,9 @@ public class PlayerStats : MonoBehaviour
         ExperienceManager.Instance.OnChange -= HandleChange;
     }
 
-    private void HandleChange(int newCurrency, int newExperience)
+    private void HandleChange(int newExperience, int newCurrency)
     {
         currentExperience += newExperience;
-       // if (Currency + newCurrency < 0)
-       // {
-
-       // }
         Currency += newCurrency;
         UpdateXpUI();
 
