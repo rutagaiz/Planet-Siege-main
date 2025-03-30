@@ -9,8 +9,10 @@ TagManager:
   - Coin
   - AllyTower
   - EnemyBullet
-  - AllyBase
-  - EnemyBase
+<<<<<<< HEAD
+=======
+  - Ally
+>>>>>>> parent of 2bfcb19 (Merge branch 'main' into Troop-mechanics)
   layers:
   - Default
   - TransparentFX

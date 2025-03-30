@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Enemy_Stats : MonoBehaviour
 {
+    public static event Action<Enemy_Stats> OnEnemyKilled;
     [SerializeField] float health, MaxHealth = 3f;
 
     [SerializeField] float moveSpeed = 5f;
@@ -33,7 +34,10 @@ public class Enemy_Stats : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
+<<<<<<< HEAD
+        ExperienceManager.Instance.Add(expAmount,currencyAmount);
+=======
         ExperienceManager.Instance.Add(currencyAmount,expAmount);
-        GameManager.Instance.AddEnemyDefeated(); // Notify stats manager
+>>>>>>> parent of 2bfcb19 (Merge branch 'main' into Troop-mechanics)
     }
 }
