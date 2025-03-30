@@ -140,6 +140,11 @@ public class turretScript : MonoBehaviour
         isDestroyed = true;
         Debug.Log($"{turretFaction} turret destroyed!");
 
+        if (turretFaction == TurretFaction.Enemy)
+        {
+            GameManager.Instance.AddTowerDestroyed();
+        }
+
         if (sr != null) sr.color = Color.gray;
         if (col != null) col.enabled = false;
 

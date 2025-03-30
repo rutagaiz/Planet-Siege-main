@@ -9,7 +9,8 @@ TagManager:
   - Coin
   - AllyTower
   - EnemyBullet
-  - Ally
+  - AllyBase
+  - EnemyBase
   layers:
   - Default
   - TransparentFX

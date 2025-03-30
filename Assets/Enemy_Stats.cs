@@ -34,5 +34,6 @@ public class Enemy_Stats : MonoBehaviour
     {
         Destroy(gameObject);
         ExperienceManager.Instance.Add(currencyAmount,expAmount);
+        GameManager.Instance.AddEnemyDefeated(); // Notify stats manager
     }
 }
