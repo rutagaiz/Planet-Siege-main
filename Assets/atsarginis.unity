@@ -629,6 +629,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 89679160}
   m_CullTransparentMesh: 1
+--- !u!1 &127602975
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 127602977}
+  - component: {fileID: 127602976}
+  m_Layer: 0
+  m_Name: VRed Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &127602976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127602975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d130b902555efe14ab3b51b9187950a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 1624682340564092282, guid: 8bd125903465ecd42a9f621c49a6faf0, type: 3}
+  spawnPoint: {fileID: 870030988}
+  minSpawnTime: 10
+  maxSpawnTime: 15
+  towersToDestroyBeforeSpawning: 2
+  minimapIconPrefab: {fileID: 8464478617984986489, guid: a7a8fb127d78d164cbb59c436d46bdde, type: 3}
+  minimapUI: {fileID: 1707582953}
+  minimapCamera: {fileID: 34713423}
+--- !u!4 &127602977
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127602975}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.34240282, y: -4.895543, z: 0.052503426}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &149305614
 GameObject:
   m_ObjectHideFlags: 0
@@ -1096,6 +1148,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 242780451}
   m_CullTransparentMesh: 1
+--- !u!1 &264440919
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 264440921}
+  - component: {fileID: 264440920}
+  m_Layer: 0
+  m_Name: Tank Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &264440920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264440919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d130b902555efe14ab3b51b9187950a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 2085671873232147079, guid: 6293574a6e79021449abaca4bef28467, type: 3}
+  spawnPoint: {fileID: 870030988}
+  minSpawnTime: 5
+  maxSpawnTime: 10
+  towersToDestroyBeforeSpawning: 1
+  minimapIconPrefab: {fileID: 760445613925544683, guid: 1aee8674946c96d43829efbeb5383db4, type: 3}
+  minimapUI: {fileID: 1707582953}
+  minimapCamera: {fileID: 34713423}
+--- !u!4 &264440921
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264440919}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.34240282, y: -4.895543, z: 0.052503426}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &285744065
 GameObject:
   m_ObjectHideFlags: 0
@@ -1217,6 +1321,8 @@ MonoBehaviour:
   repairAmount: 20
   repairRange: 2
   healthBarPrefab: {fileID: 102170849489981937, guid: 3a7ceeea802c2a64e914fbeae89d210c, type: 3}
+  GameOverScreen: {fileID: 0}
+  Victory_screen: {fileID: 0}
 --- !u!60 &285744069
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1623,6 +1729,8 @@ MonoBehaviour:
   repairAmount: 0
   repairRange: 0
   healthBarPrefab: {fileID: 102170849489981937, guid: 3a7ceeea802c2a64e914fbeae89d210c, type: 3}
+  GameOverScreen: {fileID: 0}
+  Victory_screen: {fileID: 0}
 --- !u!60 &328466651
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -2376,6 +2484,8 @@ MonoBehaviour:
   repairAmount: 20
   repairRange: 5
   healthBarPrefab: {fileID: 102170849489981937, guid: 3a7ceeea802c2a64e914fbeae89d210c, type: 3}
+  GameOverScreen: {fileID: 0}
+  Victory_screen: {fileID: 0}
 --- !u!60 &493078959
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -2496,6 +2606,58 @@ PolygonCollider2D:
       - {x: -0.11, y: 1.26}
       - {x: -0.14999999, y: 1.26}
   m_UseDelaunayMesh: 0
+--- !u!1 &500850908
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 500850910}
+  - component: {fileID: 500850909}
+  m_Layer: 0
+  m_Name: Heavy Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &500850909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500850908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d130b902555efe14ab3b51b9187950a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 8452055265527825967, guid: 743db9441ba20a646943963d6f7eaffc, type: 3}
+  spawnPoint: {fileID: 870030988}
+  minSpawnTime: 20
+  maxSpawnTime: 25
+  towersToDestroyBeforeSpawning: 3
+  minimapIconPrefab: {fileID: 1241136322283879491, guid: c2fd59374d1c0de4a9971b361837317d, type: 3}
+  minimapUI: {fileID: 1707582953}
+  minimapCamera: {fileID: 34713423}
+--- !u!4 &500850910
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500850908}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.8557004, y: -1.0837729, z: -0.0222752}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &501661359
 GameObject:
   m_ObjectHideFlags: 0
@@ -2618,6 +2780,8 @@ MonoBehaviour:
   repairAmount: 0
   repairRange: 0
   healthBarPrefab: {fileID: 102170849489981937, guid: 3a7ceeea802c2a64e914fbeae89d210c, type: 3}
+  GameOverScreen: {fileID: 0}
+  Victory_screen: {fileID: 0}
 --- !u!60 &501661363
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -3885,6 +4049,8 @@ MonoBehaviour:
   repairAmount: 0
   repairRange: 0
   healthBarPrefab: {fileID: 102170849489981937, guid: 3a7ceeea802c2a64e914fbeae89d210c, type: 3}
+  GameOverScreen: {fileID: 0}
+  Victory_screen: {fileID: 0}
 --- !u!60 &717496344
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -16818,6 +16984,8 @@ MonoBehaviour:
   repairAmount: 20
   repairRange: 5
   healthBarPrefab: {fileID: 102170849489981937, guid: 3a7ceeea802c2a64e914fbeae89d210c, type: 3}
+  GameOverScreen: {fileID: 0}
+  Victory_screen: {fileID: 0}
 --- !u!60 &776138860
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -18032,6 +18200,8 @@ MonoBehaviour:
   repairAmount: 20
   repairRange: 2
   healthBarPrefab: {fileID: 102170849489981937, guid: 3a7ceeea802c2a64e914fbeae89d210c, type: 3}
+  GameOverScreen: {fileID: 0}
+  Victory_screen: {fileID: 0}
 --- !u!60 &870030991
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -18509,6 +18679,8 @@ MonoBehaviour:
   repairAmount: 20
   repairRange: 5
   healthBarPrefab: {fileID: 102170849489981937, guid: 3a7ceeea802c2a64e914fbeae89d210c, type: 3}
+  GameOverScreen: {fileID: 0}
+  Victory_screen: {fileID: 0}
 --- !u!60 &894962285
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -26965,6 +27137,57 @@ MonoBehaviour:
   timePlayedText: {fileID: 1756031617}
   enemiesDefeatedText: {fileID: 1110320609}
   towersDestroyedText: {fileID: 1594112653}
+--- !u!1 &2138477405
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2138477407}
+  - component: {fileID: 2138477406}
+  m_Layer: 0
+  m_Name: Soldier Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2138477406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138477405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26ec506a143bbce42a47b6ecffaf854e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 279564943710337250, guid: 2c63d2f9c8feebc408aba0dba9499b19, type: 3}
+  spawnPoint: {fileID: 870030988}
+  minSpawnTime: 2
+  maxSpawnTime: 5
+  minimapIconPrefab: {fileID: 2304824308327441460, guid: e994d692a7b2b254787304bea864e29b, type: 3}
+  minimapUI: {fileID: 1707582953}
+  minimapCamera: {fileID: 34713423}
+--- !u!4 &2138477407
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138477405}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.6662107, y: 5.8007746, z: -0.061863616}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &77290449574544177
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27043,3 +27266,7 @@ SceneRoots:
   - {fileID: 2118921552}
   - {fileID: 2123939018}
   - {fileID: 34713424}
+  - {fileID: 2138477407}
+  - {fileID: 264440921}
+  - {fileID: 127602977}
+  - {fileID: 500850910}
