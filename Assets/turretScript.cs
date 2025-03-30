@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public enum TurretFaction { Ally, Enemy }
 
@@ -48,6 +49,13 @@ public class turretScript : MonoBehaviour
     private Slider healthSlider;
     private TextMeshProUGUI healthText;
 
+    // Kintamieji kad trackint kiek toweriu nuimta
+    public static event Action<int> OnTowerDestroyed;
+    private static int destroyedTowerCount = 0;
+
+    // Victory / Defeat screenai
+    public GameOverScreen GameOverScreen;
+    public Victory_screen Victory_screen;
     void Awake()
     {
         CreateHealthBar();
@@ -148,7 +156,18 @@ public class turretScript : MonoBehaviour
         if (sr != null) sr.color = Color.gray;
         if (col != null) col.enabled = false;
 
-        Destroy(gameObject, 1.5f);
+        // Kai nuimtas toweris pripliusuoja
+        destroyedTowerCount++;
+        OnTowerDestroyed?.Invoke(destroyedTowerCount);
+
+        if (CompareTag("EnemyBase"))
+        {
+            ShowVictoryScreen();
+        }
+        if (CompareTag("AllyBase"))
+        {
+            ShowDefeatScreen();
+        }
     }
 
     private Transform GetNearestTarget()
@@ -275,5 +294,14 @@ public class turretScript : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, Range);
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position, repairRange);
+    }
+
+    void ShowVictoryScreen()
+    {
+        Victory_screen.Setup();
+    }
+    void ShowDefeatScreen()
+    {
+        GameOverScreen.Setup();
     }
 }
