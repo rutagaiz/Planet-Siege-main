@@ -3,16 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags:
-  - EnemyTurret
-  - PlayerBullet
-  - Coin
-  - AllyTower
-  - EnemyBullet
-<<<<<<< HEAD
-=======
-  - Ally
->>>>>>> parent of 2bfcb19 (Merge branch 'main' into Troop-mechanics)
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -20,13 +11,13 @@ TagManager:
   - 
   - Water
   - UI
-  - EnemyTower
-  - Player
-  - PlayerBullet
-  - AllyTower
-  - AllyUnits
-  - EnemyUnits
-  - EnemyBullet
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -47,18 +38,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: BG3
-    uniqueID: 3157148075
-    locked: 0
-  - name: BG2
-    uniqueID: 3720000895
-    locked: 0
-  - name: BG1
-    uniqueID: 528952643
-    locked: 0
-  - name: Grass
-    uniqueID: 1208168227
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
