@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Enemy_Stats : MonoBehaviour
 {
-    public static event Action<Enemy_Stats> OnEnemyKilled;
     [SerializeField] float health, MaxHealth = 3f;
 
     [SerializeField] float moveSpeed = 5f;
@@ -34,7 +33,7 @@ public class Enemy_Stats : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
-        ExperienceManager.Instance.Add(expAmount, currencyAmount);
+        ExperienceManager.Instance.Add(currencyAmount,expAmount);
         GameManager.Instance.AddEnemyDefeated(); // Notify stats manager
     }
 }
