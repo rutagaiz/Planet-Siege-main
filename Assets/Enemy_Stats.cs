@@ -34,6 +34,10 @@ public class Enemy_Stats : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
+<<<<<<< HEAD
         ExperienceManager.Instance.Add(expAmount,currencyAmount);
+=======
+        ExperienceManager.Instance.Add(currencyAmount,expAmount);
+>>>>>>> parent of 2bfcb19 (Merge branch 'main' into Troop-mechanics)
     }
 }
