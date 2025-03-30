@@ -36,7 +36,7 @@ public class BulletScript : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (collision.gameObject.CompareTag("EnemyTurret") || collision.gameObject.CompareTag("EnemyBase"))
+        if (collision.gameObject.CompareTag("EnemyTurret"))
         {
             if (collision.gameObject.TryGetComponent<turretScript>(out turretScript turret))
             {
