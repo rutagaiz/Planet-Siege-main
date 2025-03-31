@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 3948833f02941f24cb5f630361d58574
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - troop1: {fileID: 3439356154849516221, guid: 608604b1cb0eece4886a317c05ff1751, type: 3}
+  - troop2: {fileID: 3495824970251564681, guid: d5888b11ecbb70742a86edcb78f91dc1, type: 3}
+  - troop3: {instanceID: 0}
+  - troop4: {instanceID: 0}
+  - troop5: {instanceID: 0}
+  - spawnPoint: {instanceID: 0}
+  - spawnTroop1Button: {instanceID: 0}
+  - spawnTroop2Button: {instanceID: 0}
+  - spawnTroop3Button: {instanceID: 0}
+  - spawnTroop4Button: {instanceID: 0}
+  - spawnTroop5Button: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

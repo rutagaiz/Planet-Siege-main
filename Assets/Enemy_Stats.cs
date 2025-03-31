@@ -8,14 +8,20 @@ public class Enemy_Stats : MonoBehaviour
 
     [SerializeField] float moveSpeed = 5f;
 
-    Rigidbody2D rb;
+    public Rigidbody2D rb;
 
     int expAmount = 10;
     int currencyAmount = 10;
 
+    public void FixedUpdate()
+    {
+        rb.linearVelocity = Vector2.left * moveSpeed;
+    }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.freezeRotation = true;
     }
 
     private void Start()
