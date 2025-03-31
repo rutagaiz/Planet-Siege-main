@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 6705487428780324996}
   - component: {fileID: -5747565877553342523}
   - component: {fileID: 2501867787962461675}
-  m_Layer: 0
+  - component: {fileID: -4014851864351146224}
+  m_Layer: 10
   m_Name: TankTroop
-  m_TagString: Untagged
+  m_TagString: AllyTroop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,3 +163,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-4014851864351146224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8970285072585117600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02e017add00d9504d920c2939cd68e25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currHealth: 20
+  maxHealth: 20
+  atk: 5
+  speed: 1
+  rb: {fileID: 2501867787962461675}

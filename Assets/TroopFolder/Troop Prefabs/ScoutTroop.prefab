@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 5261628719245306590}
   - component: {fileID: 554389600338301148}
   - component: {fileID: 1930397447234725149}
-  m_Layer: 0
+  - component: {fileID: 890647864532176948}
+  m_Layer: 10
   m_Name: ScoutTroop
-  m_TagString: Untagged
+  m_TagString: AllyTroop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,3 +163,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.24, y: 0.39}
   m_EdgeRadius: 0
+--- !u!114 &890647864532176948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3439356154849516221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b0a6c9d6c02cd24f99d48a4cba3994b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currHealth: 3
+  maxHealth: 3
+  atk: 1
+  speed: 3
+  rb: {fileID: 554389600338301148}

@@ -11,6 +11,8 @@ TagManager:
   - EnemyBullet
   - AllyBase
   - EnemyBase
+  - AllyTroop
+  - EnemyTroop
   layers:
   - Default
   - TransparentFX

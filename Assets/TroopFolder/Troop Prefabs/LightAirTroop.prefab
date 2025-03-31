@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 7812930515619533419}
   - component: {fileID: 647204027721718281}
   - component: {fileID: 6715132623264722125}
-  m_Layer: 0
+  - component: {fileID: -4576774161492914182}
+  m_Layer: 10
   m_Name: LightAirTroop
-  m_TagString: Untagged
+  m_TagString: AllyTroop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,3 +163,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.93, y: 0.6}
   m_EdgeRadius: 0
+--- !u!114 &-4576774161492914182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6181084006531093827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e4018ff9ddf17642b1b56eb25ca6a27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currHealth: 10
+  maxHealth: 10
+  atk: 5
+  speed: 3
+  rb: {fileID: 647204027721718281}

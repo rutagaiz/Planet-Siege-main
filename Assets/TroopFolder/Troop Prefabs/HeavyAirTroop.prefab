@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 2071125394808446818}
   - component: {fileID: 2248988864047553294}
   - component: {fileID: 2694240246216516859}
-  m_Layer: 0
+  - component: {fileID: -7515582849041381587}
+  m_Layer: 10
   m_Name: HeavyAirTroop
-  m_TagString: Untagged
+  m_TagString: AllyTroop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,3 +163,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.57, y: 1.04}
   m_EdgeRadius: 0
+--- !u!114 &-7515582849041381587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4956702732111794255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7473f45f2206d047afe732cb4badc0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currHealth: 30
+  maxHealth: 30
+  atk: 10
+  speed: 2
+  rb: {fileID: 2248988864047553294}
