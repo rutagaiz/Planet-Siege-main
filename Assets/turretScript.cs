@@ -146,6 +146,7 @@ public class turretScript : MonoBehaviour
     private void Die()
     {
         isDestroyed = true;
+       // this.gameObject.SetActive(false); 
         Debug.Log($"{turretFaction} turret destroyed!");
 
         if (turretFaction == TurretFaction.Enemy)

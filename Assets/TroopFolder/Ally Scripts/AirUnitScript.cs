@@ -14,6 +14,10 @@ public class AirUnitScript: MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.linearVelocity = Vector2.right * speed;
+
+        if (rb.linearVelocity.magnitude <= speed)
+        {
+            rb.AddForce(Vector2.right, ForceMode2D.Impulse);
+        }
     }
 }

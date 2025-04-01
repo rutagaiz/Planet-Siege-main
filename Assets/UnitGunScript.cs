@@ -30,6 +30,7 @@ public class GUnitGunScript : MonoBehaviour
     [SerializeField] private TurretFaction faction;
 
     private Transform currentTarget;
+    public bool HasTarget = false;
     private float nextTimeToFire;
     private Vector2 shootDirection;
 
@@ -39,6 +40,7 @@ public class GUnitGunScript : MonoBehaviour
 
         if (currentTarget != null)
         {
+            HasTarget = true;
             shootDirection = (currentTarget.position - transform.position).normalized;
 
             if (gun != null)
@@ -56,6 +58,7 @@ public class GUnitGunScript : MonoBehaviour
 
             Debug.DrawRay(transform.position, shootDirection * range, Color.cyan);
         }
+        else HasTarget = false;
     }
 
     private void Shoot()
