@@ -639,9 +639,9 @@ GameObject:
   m_Component:
   - component: {fileID: 127602977}
   - component: {fileID: 127602976}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: VRed Spawner
-  m_TagString: Untagged
+  m_TagString: EnemyTroop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1158,9 +1158,9 @@ GameObject:
   m_Component:
   - component: {fileID: 264440921}
   - component: {fileID: 264440920}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tank Spawner
-  m_TagString: Untagged
+  m_TagString: EnemyTroop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1305,10 +1305,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turretFaction: 0
   Range: 5
-  targetTags: []
+  targetTags:
+  - EnemyTroop
   targetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   Gun: {fileID: 1061355314}
   Bullet: {fileID: 8411451229459990027, guid: e63973cf188a02b4ebe4a71f74e6700d, type: 3}
   FireRate: 1
@@ -1714,9 +1715,10 @@ MonoBehaviour:
   Range: 7
   targetTags:
   - Player
+  - AllyTroop
   targetLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 1152
   Gun: {fileID: 588014697}
   Bullet: {fileID: 516782520773423697, guid: ef777e4840cae8d46bb3849fb6d8ad3c, type: 3}
   FireRate: 1
@@ -2468,10 +2470,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turretFaction: 0
   Range: 5
-  targetTags: []
+  targetTags:
+  - EnemyTroop
   targetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   Gun: {fileID: 1334810469}
   Bullet: {fileID: 516782520773423697, guid: bdbb037cbbfbe4b4b9a7b3a9c69fd80f, type: 3}
   FireRate: 1
@@ -2616,9 +2619,9 @@ GameObject:
   m_Component:
   - component: {fileID: 500850910}
   - component: {fileID: 500850909}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Heavy Spawner
-  m_TagString: Untagged
+  m_TagString: EnemyTroop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2765,9 +2768,10 @@ MonoBehaviour:
   Range: 7
   targetTags:
   - Player
+  - AllyTroop
   targetLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 1152
   Gun: {fileID: 1673712815}
   Bullet: {fileID: 516782520773423697, guid: f5564412b49775248bbc9ff0900cddd4, type: 3}
   FireRate: 1
@@ -4034,9 +4038,10 @@ MonoBehaviour:
   Range: 7
   targetTags:
   - Player
+  - AllyTroop
   targetLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 1152
   Gun: {fileID: 2111180687}
   Bullet: {fileID: 516782520773423697, guid: 66f565aa7e8a3c846a1b1259633e0363, type: 3}
   FireRate: 1
@@ -16968,10 +16973,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turretFaction: 0
   Range: 5
-  targetTags: []
+  targetTags:
+  - EnemyTroop
   targetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   Gun: {fileID: 524059918}
   Bullet: {fileID: 516782520773423697, guid: 37145b0ffdc54b140be298c0c4ba86ce, type: 3}
   FireRate: 1
@@ -18180,9 +18186,10 @@ MonoBehaviour:
   Range: 10
   targetTags:
   - Player
+  - AllyTroop
   targetLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 1152
   Gun: {fileID: 1650067659}
   Bullet: {fileID: 8411451229459990027, guid: e63973cf188a02b4ebe4a71f74e6700d, type: 3}
   FireRate: 1
@@ -18658,10 +18665,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turretFaction: 0
   Range: 5
-  targetTags: []
+  targetTags:
+  - EnemyTroop
   targetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   Gun: {fileID: 1012533561}
   Bullet: {fileID: 516782520773423697, guid: 0a0b1720d9b91754e9c746bc38d9f4d9, type: 3}
   FireRate: 1
@@ -25871,6 +25879,7 @@ MonoBehaviour:
   health: 0
   MaxHealth: 3
   moveSpeed: 5
+  rb: {fileID: 0}
 --- !u!212 &1909939685
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -27248,9 +27257,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2138477407}
   - component: {fileID: 2138477406}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Soldier Spawner
-  m_TagString: Untagged
+  m_TagString: EnemyTroop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
