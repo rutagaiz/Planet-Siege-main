@@ -1,79 +1,96 @@
 using UnityEngine;
 
-public class Crouch : MonoBehaviour
+public class CrouchController : MonoBehaviour
 {
-    public float crouchHeight = 0.5f;
-    public Sprite idleSprite;
-    public Sprite crouchSprite;
-    private Vector2 normalScale;
-    private Vector2 normalColliderSize;
-    private Vector2 normalColliderOffset;
-    private float yInput;
-    private bool facingRight = true;
+    public Transform torso; // Assign the "Torso" child object in the Inspector
+    public Transform head; // Assign the "Head" child object in the Inspector
+    public BoxCollider2D playerCollider; // Reference to the main collider on the Player object
+    public Sprite crouchingSprite; // Assign crouching sprite in the Inspector
+    public Sprite standingSprite; // Assign standing sprite in the Inspector
+    public float crouchHeightReduction = 0.5f; // How much shorter the collider should be when crouching
+    public float crouchSpriteLowering = 0.5f; // How much lower the torso should move when crouching
+    public float headLowering = 0.3f; // How much lower the head should move when crouching
 
-    private BoxCollider2D boxCollider;
-    private SpriteRenderer spriteRenderer;
+    private SpriteRenderer torsoRenderer;
+    private bool isCrouching = false;
+
+    private Vector2 standingSize;  // Stores the original collider size
+    private Vector2 standingOffset; // Stores the original collider offset
+    private Vector2 crouchingSize; // Will be calculated based on standing size
+    private Vector2 crouchingOffset; // Will be auto-adjusted to keep feet on the ground
+    private Vector3 standingTorsoPosition; // Stores original torso position
+    private Vector3 crouchingTorsoPosition; // Will be calculated
+    private Vector3 standingHeadPosition; // Stores original head position
+    private Vector3 crouchingHeadPosition; // Will be calculated
 
     void Start()
     {
+        torsoRenderer = torso.GetComponent<SpriteRenderer>();
 
-        boxCollider = GetComponent<BoxCollider2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (playerCollider != null)
+        {
+            // Store original standing values
+            standingSize = playerCollider.size;
+            standingOffset = playerCollider.offset;
+            standingTorsoPosition = torso.localPosition;
+            standingHeadPosition = head.localPosition;
 
-        // Store visual model scale size 
-        normalScale = transform.localScale;
+            // Calculate crouching size based on reduction amount
+            crouchingSize = new Vector2(standingSize.x, standingSize.y - crouchHeightReduction);
 
-        // Store original collider size and offset (crouching hitbox)
-        normalColliderSize = boxCollider.size;
-        normalColliderOffset = boxCollider.offset;
+            // Adjust the offset so that the feet stay in place
+            float offsetAdjustment = (standingSize.y - crouchingSize.y) / 2f;
+            crouchingOffset = new Vector2(standingOffset.x, standingOffset.y - offsetAdjustment);
+
+            // Calculate new positions when crouching
+            crouchingTorsoPosition = standingTorsoPosition + new Vector3(0, -crouchSpriteLowering, 0);
+            crouchingHeadPosition = standingHeadPosition + new Vector3(0, -headLowering, 0);
+        }
     }
 
     void Update()
     {
-        yInput = Input.GetAxisRaw("Vertical");
-
-        if (yInput < 0) // Crouching
+        if (Input.GetKeyDown(KeyCode.S))
         {
-            spriteRenderer.sprite = crouchSprite;
-
-            // Reduce visual size of the model 
-            transform.localScale = new Vector2(normalScale.x, crouchHeight);
-
-            // Reduce collider size and adjust offset (crouching hitbox)
-            boxCollider.size = new Vector2(normalColliderSize.x, normalColliderSize.y * 0.5f);
-            boxCollider.offset = new Vector2(normalColliderOffset.x, normalColliderOffset.y - 0.5f);
+            Crouch();
         }
-        else // Standing up
+        else if (Input.GetKeyUp(KeyCode.S))
         {
-            spriteRenderer.sprite = idleSprite;
-
-            // Return visual size of the model to the normal value
-            transform.localScale = normalScale;
-
-            // Return collider size and offset to the original value (crouching hitbox)
-            boxCollider.size = normalColliderSize;
-            boxCollider.offset = normalColliderOffset;
-        }
-
-        // Handle character flipping and movement
-        float xInput = Input.GetAxisRaw("Horizontal");
-
-        // If moving right but facing left, flip to the right
-        if (xInput > 0 && !facingRight)
-        {
-            Flip();
-        }
-
-        // If moving left but facing right, flip to the left
-        else if (xInput < 0 && facingRight)
-        {
-            Flip();
+            StandUp();
         }
     }
 
-    void Flip()
+    void Crouch()
     {
-        facingRight = !facingRight;
-        transform.localScale = new Vector2(-normalScale.x, transform.localScale.y);
+        if (!isCrouching)
+        {
+            isCrouching = true;
+            torsoRenderer.sprite = crouchingSprite;
+            torso.localPosition = crouchingTorsoPosition; // Move torso down
+            head.localPosition = crouchingHeadPosition; // Move head down
+
+            if (playerCollider != null)
+            {
+                playerCollider.size = crouchingSize;
+                playerCollider.offset = crouchingOffset;
+            }
+        }
+    }
+
+    void StandUp()
+    {
+        if (isCrouching)
+        {
+            isCrouching = false;
+            torsoRenderer.sprite = standingSprite;
+            torso.localPosition = standingTorsoPosition; // Move torso back up
+            head.localPosition = standingHeadPosition; // Move head back up
+
+            if (playerCollider != null)
+            {
+                playerCollider.size = standingSize;
+                playerCollider.offset = standingOffset;
+            }
+        }
     }
 }

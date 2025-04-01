@@ -12,8 +12,8 @@ public class Player_movement : MonoBehaviour
     public GameManager cm;
 
     // References to sprite renderers
-    private SpriteRenderer playerSpriteRenderer;
     private SpriteRenderer helmetSpriteRenderer;
+    private SpriteRenderer torsoSpriteRenderer;
 
     void Start()
     {
@@ -21,11 +21,6 @@ public class Player_movement : MonoBehaviour
         rb.freezeRotation = true;
 
         // Get the SpriteRenderer components
-        playerSpriteRenderer = GetComponent<SpriteRenderer>();
-        if (playerSpriteRenderer == null)
-        {
-            Debug.LogError("Player SpriteRenderer component not found!");
-        }
 
         // Find the helmet child object
         Transform helmet = transform.Find("helmet_0");
@@ -40,6 +35,21 @@ public class Player_movement : MonoBehaviour
         else
         {
             Debug.LogError("Helmet child object not found!");
+        }
+
+        // Find the torso child object
+        Transform torso = transform.Find("torso");
+        if (torso != null)
+        {
+            torsoSpriteRenderer = torso.GetComponent<SpriteRenderer>();
+            if (torsoSpriteRenderer == null)
+            {
+                Debug.LogError("Torso SpriteRenderer component not found!");
+            }
+        }
+        else
+        {
+            Debug.LogError("Torso child object not found!");
         }
     }
 
@@ -79,13 +89,17 @@ public class Player_movement : MonoBehaviour
         rb.linearVelocity = new Vector2(movement * moveSpeed, rb.linearVelocity.y);
     }
 
-    // Flip both player and helmet
+    // Flip both torso and helmet
     private void Flip(bool faceRight)
     {
         facingRight = faceRight;
 
-        // Flip player sprite
-        playerSpriteRenderer.flipX = !faceRight;
+        // Flip torso sprite if it exists
+        if (torsoSpriteRenderer != null)
+        {
+            torsoSpriteRenderer.flipX = !faceRight;
+        }
+
 
         // Flip helmet sprite if it exists
         if (helmetSpriteRenderer != null)

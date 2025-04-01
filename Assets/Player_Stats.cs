@@ -78,12 +78,14 @@ public class PlayerStats : MonoBehaviour
     private void Die()
     {
         Respawn();
+        Debug.LogError("Player has died");
     }
 
     private void Respawn()
     {
         transform.position = respawnPoint;
         currentHealth = maxHealth;
+        Debug.LogError("Player has respawned");
     }
 
     private void UpdateHealthUI()
