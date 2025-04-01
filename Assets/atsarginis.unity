@@ -25880,6 +25880,7 @@ MonoBehaviour:
   MaxHealth: 3
   moveSpeed: 5
   rb: {fileID: 0}
+  expAmount: 10
 --- !u!212 &1909939685
 SpriteRenderer:
   m_ObjectHideFlags: 0
