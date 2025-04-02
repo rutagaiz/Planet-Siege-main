@@ -22,6 +22,7 @@ public class Shooting : MonoBehaviour
         mainCam = Camera.main;
         currentAmmo = maxAmmo; // Set full ammo on start
         UpdateAmmoUI(); // Update UI at the start
+        Ammo.OnAmmoCollect += AddAmmo;
     }
 
     void Update()
@@ -70,5 +71,10 @@ public class Shooting : MonoBehaviour
         {
             ammoText.text = currentAmmo + " / " + maxAmmo;
         }
+    }
+
+    private void AddAmmo(int amount)
+    {
+        currentAmmo += amount;
     }
 }

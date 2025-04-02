@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Enemy_Stats : MonoBehaviour
 {
@@ -15,6 +18,9 @@ public class Enemy_Stats : MonoBehaviour
     [SerializeField]
     int expAmount = 10;
     int currencyAmount = 10;
+
+    [Header("PowerUps")]
+    public List<PowerUp> powerUps = new List<PowerUp>();
 
     public void FixedUpdate()
     {
@@ -47,10 +53,31 @@ public class Enemy_Stats : MonoBehaviour
             Die();
         }
     }
+
+   
+    
     void Die()
     {
+        foreach(PowerUp powerUp in powerUps)
+        {
+            if (Random.Range(0f, 100f) <= powerUp.dropChance)
+            {
+                ShowPowerUp(powerUp.itemPrefab);
+                break;
+            }
+            
+        }
         Destroy(gameObject);
         ExperienceManager.Instance.Add(expAmount, currencyAmount);
         GameManager.Instance.AddEnemyDefeated(); // Notify stats manager
+    }
+
+    void ShowPowerUp(GameObject powerUp)
+    {
+        if(powerUp)
+        {
+            GameObject droppedLoot = Instantiate(powerUp, transform.position, Quaternion.identity);
+
+        }
     }
 }

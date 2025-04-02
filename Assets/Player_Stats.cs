@@ -27,6 +27,7 @@ public class PlayerStats : MonoBehaviour
     {
         respawnPoint = transform.position;
         UpdateHealthUI();
+        Medkit.OnMedkitCollect += TakeDamage;
     }
 
     private void OnEnable()
