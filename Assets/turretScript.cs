@@ -46,8 +46,8 @@ public class turretScript : MonoBehaviour
     [Header("UI References")]
     public GameObject healthBarPrefab;
     private GameObject towerHPUI;
-    private Slider healthSlider;
-    private TextMeshProUGUI healthText;
+    public Slider healthSlider;
+    public TextMeshProUGUI healthText;
 
     // Kintamieji kad trackint kiek toweriu nuimta
     public static event Action<int> OnTowerDestroyed;
@@ -56,17 +56,14 @@ public class turretScript : MonoBehaviour
     // Victory / Defeat screenai
     public GameOverScreen GameOverScreen;
     public Victory_screen Victory_screen;
-    void Awake()
-    {
-        CreateHealthBar();
-    }
 
-    void Start()
+    public void Initialize() //for testing, does what start did previously but public possible call
     {
-        currentHealth = maxHealth;
         col = GetComponent<Collider2D>();
         sr = GetComponent<SpriteRenderer>();
         playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
+
+        currentHealth = maxHealth;
 
         if (healthSlider != null)
         {
@@ -75,6 +72,18 @@ public class turretScript : MonoBehaviour
         }
 
         UpdateHealthUI();
+    }
+
+
+
+    void Awake()
+    {
+        CreateHealthBar();
+    }
+
+    void Start()
+    {
+        Initialize();
     }
 
     void Update()
@@ -116,7 +125,7 @@ public class turretScript : MonoBehaviour
         }
     }
 
-    void Shoot()
+    public void Shoot()
     {
         GameObject bulletIns = Instantiate(Bullet, ShootPoint.position, Quaternion.identity);
 
