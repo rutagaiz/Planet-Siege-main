@@ -57,7 +57,7 @@ public class TurretBullet : MonoBehaviour
         // Jei pataikė į žaidėją
         if (bulletFaction == BulletFaction.Enemy && collision.gameObject.CompareTag("Player"))
         {
-            if (collision.gameObject.TryGetComponent<PlayerStats>(out PlayerStats player))
+            if (collision.gameObject.TryGetComponent<Player_Stats>(out Player_Stats player))
             {
                 player.TakeDamage((int)bulletDamage);
                 Debug.Log($"💥 Player hit for {bulletDamage}");

@@ -16,6 +16,7 @@ public class Player_movement : MonoBehaviour
     public SpriteRenderer torsoSpriteRenderer;
 
     public bool simulateWPressed = false;
+    public bool simulateSPressed = false;
 
 
     public void Start()
