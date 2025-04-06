@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Player_movement : MonoBehaviour
 {
-    private float movement;
+    public float movement;
     public float moveSpeed = 5f;
-    private bool facingRight = true;
+    public bool facingRight = true;
     public Rigidbody2D rb;
     public float flySpeed = 5f;
     public float fallSpeed = 5f;
@@ -12,10 +12,13 @@ public class Player_movement : MonoBehaviour
     public GameManager cm;
 
     // References to sprite renderers
-    private SpriteRenderer helmetSpriteRenderer;
-    private SpriteRenderer torsoSpriteRenderer;
+    public SpriteRenderer helmetSpriteRenderer;
+    public SpriteRenderer torsoSpriteRenderer;
 
-    void Start()
+    public bool simulateWPressed = false;
+
+
+    public void Start()
     {
         // LOCK rotation so player NEVER tilts or spins
         rb.freezeRotation = true;
@@ -53,7 +56,7 @@ public class Player_movement : MonoBehaviour
         }
     }
 
-    void Update()
+    public void Update()
     {
         movement = Input.GetAxis("Horizontal");
 
@@ -67,7 +70,7 @@ public class Player_movement : MonoBehaviour
             Flip(true);
         }
 
-        if (Input.GetKey(KeyCode.W) && transform.position.y < maxY)
+        if ((Input.GetKey(KeyCode.W) || simulateWPressed) && transform.position.y < maxY)
         {
             FlyUp();
         }
@@ -84,13 +87,13 @@ public class Player_movement : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    public void FixedUpdate()
     {
         rb.linearVelocity = new Vector2(movement * moveSpeed, rb.linearVelocity.y);
     }
 
     // Flip both torso and helmet
-    private void Flip(bool faceRight)
+    public void Flip(bool faceRight)
     {
         facingRight = faceRight;
 
@@ -108,22 +111,28 @@ public class Player_movement : MonoBehaviour
         }
     }
 
-    void FlyUp()
+    public void FlyUp()
     {
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, flySpeed);
     }
 
-    void FlyDown()
+    public void FlyDown()
     {
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, -fallSpeed);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Coin"))
         {
             GameManager.Instance.AddCoin(1); 
             //Destroy(other.gameObject);      
         }
+    }
+
+    public void TestMove(float horizontalInput)
+    {
+        movement = horizontalInput;
+        FixedUpdate(); // Directly call physics update
     }
 }

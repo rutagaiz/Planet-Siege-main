@@ -22255,12 +22255,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db6777c4f6a6df34b8c37293b03306b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movement: 0
   moveSpeed: 7
+  facingRight: 1
   rb: {fileID: 1522584311}
   flySpeed: 6
   fallSpeed: 6
   maxY: 13
   cm: {fileID: 2123939017}
+  helmetSpriteRenderer: {fileID: 0}
+  torsoSpriteRenderer: {fileID: 0}
 --- !u!114 &1522584314
 MonoBehaviour:
   m_ObjectHideFlags: 0
