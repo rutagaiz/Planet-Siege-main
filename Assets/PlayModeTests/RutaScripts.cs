@@ -149,13 +149,21 @@ public class RutaScripts
     private class MockInput : IInput
     {
         private bool wPressed;
+        private bool sPressed;
 
         public void SetKey(KeyCode key, bool pressed)
         {
             if (key == KeyCode.W) wPressed = pressed;
+            if (key == KeyCode.S) sPressed = pressed;
         }
 
-        public bool GetKey(KeyCode key) => key == KeyCode.W ? wPressed : false;
+        //public bool GetKey(KeyCode key) => key == KeyCode.W ? wPressed : false;
+        public bool GetKey(KeyCode key)
+        {
+            if (key == KeyCode.W) return wPressed;
+            if (key == KeyCode.S) return sPressed;
+            return false;
+        }
         public float GetAxis(string axis) => 0f;
     }
 

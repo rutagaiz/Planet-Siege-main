@@ -222,7 +222,7 @@ public class turretScript : MonoBehaviour
             return;
         }
 
-        if (!PlayerStats.Instance.SpendCurrency(repairCost))
+        if (!Player_Stats.Instance.SpendCurrency(repairCost))
         {
             Debug.Log("❌ Not enough currency.");
             return;

@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/atsarginis.unity
+    guid: 3c6175919f0c4244085a73db837bfd91
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 64be9e046e06fbb4485d455ff66fcc2f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

@@ -2,9 +2,9 @@ using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerStats : MonoBehaviour
+public class Player_Stats : MonoBehaviour
 {
-    public static PlayerStats Instance;
+    public static Player_Stats Instance;
 
     private Vector2 respawnPoint;
     public Slider slider;
@@ -40,7 +40,7 @@ public class PlayerStats : MonoBehaviour
         ExperienceManager.Instance.OnChange -= HandleChange;
     }
 
-    private void HandleChange(int newExperience, int newCurrency)
+    public void HandleChange(int newExperience, int newCurrency)
     {
         currentExperience += newExperience;
         Currency += newCurrency;
