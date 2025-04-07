@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 public class CrouchController : MonoBehaviour
 {
     public Transform torso; // Assign the "Torso" child object in the Inspector
