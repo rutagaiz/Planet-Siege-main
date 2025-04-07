@@ -1,8 +1,7 @@
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using System.Collections;
-
 
 public class RutaScripts
 {
@@ -39,6 +38,7 @@ public class RutaScripts
         // Mock GameManager
         mockGameManager = new GameObject("GameManager").AddComponent<GameManager>();
         GameManager.Instance = mockGameManager;
+
         //player.cm = mockGameManager; // Assign to player's reference
 
         // Initialize components
@@ -117,56 +117,6 @@ public class RutaScripts
         Assert.AreEqual(0, rb.linearVelocity.y);
     }
 
-    //// 4. Coin collection test with mock
-    //[UnityTest]
-    //public IEnumerator Player_CollectsCoin_OnTriggerEnter()
-    //{
-    //    // Verify GameManager is set up
-    //    Assert.IsNotNull(GameManager.Instance, "GameManager instance is null");
-    //    Assert.IsNotNull(player.cm, "Player's GameManager reference is null");
-
-    //    int initialCoins = mockGameManager.GetCoins();
-
-    //    // Create test coin
-    //    var coin = new GameObject("Coin");
-    //    var coinCollider = coin.AddComponent<BoxCollider2D>();
-    //    coinCollider.isTrigger = true;
-    //    coin.tag = "Coin";
-
-    //    // Manually trigger the collision
-    //    player.OnTriggerEnter2D(coinCollider);
-
-    //    // Verify
-    //    Assert.AreEqual(initialCoins + 1, mockGameManager.GetCoins(),
-    //        "GameManager should have received 1 coin");
-
-    //    // Cleanup
-    //    Object.DestroyImmediate(coin);
-    //    yield return null;
-    //}
-
-    // 5. Mock Input System
-    private class MockInput : IInput
-    {
-        private bool wPressed;
-        private bool sPressed;
-
-        public void SetKey(KeyCode key, bool pressed)
-        {
-            if (key == KeyCode.W) wPressed = pressed;
-            if (key == KeyCode.S) sPressed = pressed;
-        }
-
-        //public bool GetKey(KeyCode key) => key == KeyCode.W ? wPressed : false;
-        public bool GetKey(KeyCode key)
-        {
-            if (key == KeyCode.W) return wPressed;
-            if (key == KeyCode.S) return sPressed;
-            return false;
-        }
-        public float GetAxis(string axis) => 0f;
-    }
-
     // 6. Edge case test for sprite renderers
     [Test]
     public void Player_HandlesMissingSpriteRenderers_Gracefully()
@@ -198,12 +148,12 @@ public interface IInput
     float GetAxis(string axis);
 }
 
-// Testable version of GameManager
-public class GameManager : MonoBehaviour
-{
-    public static GameManager Instance;
-    private int coins;
 
-    public void AddCoin(int amount) => coins += amount;
-    public int GetCoins() => coins;
-}
+//public class GameManager : MonoBehaviour
+//{
+//    public static GameManager Instance;
+ //  private int coins;
+
+//    public void AddCoin(int amount) => coins += amount;
+//    public int GetCoins() => coins;
+//}

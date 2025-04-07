@@ -2,7 +2,8 @@
     "name": "EditorTests",
     "rootNamespace": "",
     "references": [
-        "GUID:102af16a84508134fb9f04f88e482ac5"
+        "GUID:102af16a84508134fb9f04f88e482ac5",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
     ],
     "includePlatforms": [
         "Editor"

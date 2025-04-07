@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -79,5 +79,11 @@ public class Enemy_Stats : MonoBehaviour
             GameObject droppedLoot = Instantiate(powerUp, transform.position, Quaternion.identity);
 
         }
+    }
+
+    public void ManualInitForTesting()
+    {
+        Awake();  // kviečia lokaliai (nes klasėje)
+        Start();
     }
 }
