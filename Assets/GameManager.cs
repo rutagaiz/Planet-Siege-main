@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }
+    public static GameManager Instance { get; set; }
 
     // Public stats
     public int coinCount = 0;
@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     public float TimePlayed { get; private set; }
     public int EnemiesDefeated { get; private set; }
+
+
     public int TowersDestroyed { get; private set; }
 
     void Awake()
@@ -80,6 +82,6 @@ public class GameManager : MonoBehaviour
         UpdateCoinUI();
     }
 
-    public void AddEnemyDefeated() => EnemiesDefeated++;
+    public virtual void AddEnemyDefeated() => EnemiesDefeated++;
     public void AddTowerDestroyed() => TowersDestroyed++;
 }

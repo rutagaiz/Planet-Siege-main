@@ -1,5 +1,5 @@
-using UnityEngine;
-using TMPro; // For TextMeshPro UI
+﻿using UnityEngine;
+using TMPro;
 
 public class Shooting : MonoBehaviour
 {
@@ -15,24 +15,23 @@ public class Shooting : MonoBehaviour
     [SerializeField] private int maxAmmo = 10;
     private int currentAmmo;
 
-    [SerializeField] private TextMeshProUGUI ammoText; // Assign this in the Inspector
+    [SerializeField] private TextMeshProUGUI ammoText;
 
     void Start()
     {
         mainCam = Camera.main;
-        currentAmmo = maxAmmo; // Set full ammo on start
-        UpdateAmmoUI(); // Update UI at the start
+        currentAmmo = maxAmmo;
+        UpdateAmmoUI();
         Ammo.OnAmmoCollect += AddAmmo;
     }
 
-    void Update()
+    public void Update()
     {
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
         Vector3 rotation = mousePos - transform.position;
         float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rotZ);
 
-        // Fire rate control
         if (!canFire)
         {
             timer += Time.deltaTime;
@@ -43,28 +42,34 @@ public class Shooting : MonoBehaviour
             }
         }
 
-        // Fire bullet only if ammo is available
-        if (Input.GetMouseButton(0) && canFire && currentAmmo > 0)
+        // Šaudymo sąlyga – atskirta į testuojamą metodą
+        if (Input.GetMouseButton(0))
         {
-            canFire = false;
-            Instantiate(bullet, bulletTransform.position, Quaternion.identity);
-            currentAmmo--; // Reduce ammo count
-            UpdateAmmoUI(); // Update UI
+            TryFireManually();
         }
 
         if (mousePos.x < transform.position.x)
         {
-            // Look left
-            transform.localScale = new Vector3(1, -1, 1); // arba (-1, 1, 1) jei norite tik horizontal flip
+            transform.localScale = new Vector3(1, -1, 1);
         }
         else
         {
-            // Look right
             transform.localScale = new Vector3(1, 1, 1);
         }
     }
 
-    // Update the UI text in "ammoLeft / maxAmmo" format
+    // 🔥 Šis metodas bus naudojamas testuose vietoj `Input.GetMouseButton(0)`
+    public void TryFireManually()
+    {
+        if (canFire && currentAmmo > 0)
+        {
+            canFire = false;
+            Instantiate(bullet, bulletTransform.position, Quaternion.identity);
+            currentAmmo--;
+            UpdateAmmoUI();
+        }
+    }
+
     private void UpdateAmmoUI()
     {
         if (ammoText != null)

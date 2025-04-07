@@ -1322,6 +1322,8 @@ MonoBehaviour:
   repairAmount: 20
   repairRange: 2
   healthBarPrefab: {fileID: 102170849489981937, guid: 3a7ceeea802c2a64e914fbeae89d210c, type: 3}
+  healthSlider: {fileID: 0}
+  healthText: {fileID: 0}
   GameOverScreen: {fileID: 0}
   Victory_screen: {fileID: 0}
 --- !u!60 &285744069
@@ -1731,6 +1733,8 @@ MonoBehaviour:
   repairAmount: 0
   repairRange: 0
   healthBarPrefab: {fileID: 102170849489981937, guid: 3a7ceeea802c2a64e914fbeae89d210c, type: 3}
+  healthSlider: {fileID: 0}
+  healthText: {fileID: 0}
   GameOverScreen: {fileID: 0}
   Victory_screen: {fileID: 0}
 --- !u!60 &328466651
@@ -2487,6 +2491,8 @@ MonoBehaviour:
   repairAmount: 20
   repairRange: 5
   healthBarPrefab: {fileID: 102170849489981937, guid: 3a7ceeea802c2a64e914fbeae89d210c, type: 3}
+  healthSlider: {fileID: 0}
+  healthText: {fileID: 0}
   GameOverScreen: {fileID: 0}
   Victory_screen: {fileID: 0}
 --- !u!60 &493078959
@@ -2784,6 +2790,8 @@ MonoBehaviour:
   repairAmount: 0
   repairRange: 0
   healthBarPrefab: {fileID: 102170849489981937, guid: 3a7ceeea802c2a64e914fbeae89d210c, type: 3}
+  healthSlider: {fileID: 0}
+  healthText: {fileID: 0}
   GameOverScreen: {fileID: 0}
   Victory_screen: {fileID: 0}
 --- !u!60 &501661363
@@ -4054,6 +4062,8 @@ MonoBehaviour:
   repairAmount: 0
   repairRange: 0
   healthBarPrefab: {fileID: 102170849489981937, guid: 3a7ceeea802c2a64e914fbeae89d210c, type: 3}
+  healthSlider: {fileID: 0}
+  healthText: {fileID: 0}
   GameOverScreen: {fileID: 0}
   Victory_screen: {fileID: 0}
 --- !u!60 &717496344
@@ -16990,6 +17000,8 @@ MonoBehaviour:
   repairAmount: 20
   repairRange: 5
   healthBarPrefab: {fileID: 102170849489981937, guid: 3a7ceeea802c2a64e914fbeae89d210c, type: 3}
+  healthSlider: {fileID: 0}
+  healthText: {fileID: 0}
   GameOverScreen: {fileID: 0}
   Victory_screen: {fileID: 0}
 --- !u!60 &776138860
@@ -18304,6 +18316,8 @@ MonoBehaviour:
   repairAmount: 20
   repairRange: 2
   healthBarPrefab: {fileID: 102170849489981937, guid: 3a7ceeea802c2a64e914fbeae89d210c, type: 3}
+  healthSlider: {fileID: 0}
+  healthText: {fileID: 0}
   GameOverScreen: {fileID: 0}
   Victory_screen: {fileID: 0}
 --- !u!60 &870030991
@@ -18784,6 +18798,8 @@ MonoBehaviour:
   repairAmount: 20
   repairRange: 5
   healthBarPrefab: {fileID: 102170849489981937, guid: 3a7ceeea802c2a64e914fbeae89d210c, type: 3}
+  healthSlider: {fileID: 0}
+  healthText: {fileID: 0}
   GameOverScreen: {fileID: 0}
   Victory_screen: {fileID: 0}
 --- !u!60 &894962285
@@ -22265,6 +22281,8 @@ MonoBehaviour:
   cm: {fileID: 2123939017}
   helmetSpriteRenderer: {fileID: 0}
   torsoSpriteRenderer: {fileID: 0}
+  simulateWPressed: 0
+  simulateSPressed: 0
 --- !u!114 &1522584314
 MonoBehaviour:
   m_ObjectHideFlags: 0
