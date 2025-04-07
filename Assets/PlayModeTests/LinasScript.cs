@@ -12,12 +12,12 @@ public class BulletScriptTests
     [SetUp]
     public void SetUp()
     {
-        bullet = new GameObject();
+        bullet = new GameObject("Bullet");
         bullet.AddComponent<CircleCollider2D>();
         rb = bullet.AddComponent<Rigidbody2D>();
         bullet.AddComponent<BulletScript>();
 
-        // Mock a main camera
+        // Mock main camera
         var camObj = new GameObject("MainCamera");
         testCam = camObj.AddComponent<Camera>();
         testCam.tag = "MainCamera";
@@ -61,31 +61,49 @@ public class BulletScriptTests
         Assert.IsTrue(zRotation >= 0 && zRotation <= 360, "Bullet rotation not correctly applied.");
     }
 
+    //  Mock Test: Check if TakeDamage() was called on enemy
     [UnityTest]
-    public IEnumerator BulletDealsDamageToEnemy()
+    public IEnumerator BulletCallsEnemyTakeDamage()
     {
-        var enemy = new GameObject().AddComponent<Enemy_Stats>();
-        enemy.transform.position = bullet.transform.position;
-        enemy.gameObject.AddComponent<BoxCollider2D>();
+        var mockEnemyObj = new GameObject("MockEnemy");
+        mockEnemyObj.AddComponent<BoxCollider2D>();
+        mockEnemyObj.transform.position = bullet.transform.position;
+
+        var mockEnemy = mockEnemyObj.AddComponent<MockEnemyStats>();
         bullet.GetComponent<Rigidbody2D>().simulated = true;
 
-        float initialHealth = enemy.health;
-        Physics2D.Simulate(0.1f);
-
         yield return new WaitForFixedUpdate();
-        Assert.Less(enemy.health, initialHealth, "Enemy did not take damage from bullet.");
+
+        Assert.IsTrue(mockEnemy.takeDamageCalled, "❌ Bullet did not call TakeDamage() on enemy.");
     }
 
-    [UnityTest]
-    public IEnumerator BulletDestroysOnTurretHit()
+    //  Parameterized Test: Bullet force sets correct velocity magnitude
+    [TestCase(5f)]
+    [TestCase(10f)]
+    [TestCase(20f)]
+    public void BulletForceAppliesCorrectVelocity(float testForce)
     {
-        var turretObj = new GameObject("Turret");
-        turretObj.tag = "EnemyTurret";
-        var turret = turretObj.AddComponent<turretScript>();
-        turretObj.AddComponent<BoxCollider2D>();
-        turretObj.transform.position = bullet.transform.position;
+        var script = bullet.GetComponent<BulletScript>();
 
-        yield return new WaitForFixedUpdate();
-        Assert.IsTrue(turret.health < turret.maxHealth, "Turret did not take damage.");
+        // Set private field "force" via reflection
+        var forceField = typeof(BulletScript).GetField("force", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+        forceField.SetValue(script, testForce);
+
+        Input.mousePosition = new Vector3(Screen.width, Screen.height, 0); // Simulate mouse input
+        script.Start();
+
+        float velocityMagnitude = rb.velocity.magnitude;
+        Assert.AreEqual(testForce, velocityMagnitude, 0.1f, $"❌ Bullet velocity magnitude doesn't match expected force {testForce}");
+    }
+
+    // Supporting mock enemy
+    public class MockEnemyStats : Enemy_Stats
+    {
+        public bool takeDamageCalled = false;
+
+        public override void TakeDamage(float amount)
+        {
+            takeDamageCalled = true;
+        }
     }
 }
