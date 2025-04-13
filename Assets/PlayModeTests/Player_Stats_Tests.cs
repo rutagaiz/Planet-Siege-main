@@ -24,7 +24,7 @@ public class Player_Stats_Tests : MonoBehaviour
         yield return null; // Allow a frame to make sure everything is initialized
 
         // Find the PlayerStats component on the GameObject in the scene
-        playerStats = GameObject.FindObjectOfType<Player_Stats>();
+        playerStats = Object.FindFirstObjectByType<Player_Stats>();
         Assert.IsNotNull(playerStats, "PlayerStats component is not found in the scene! Ensure it's attached to a GameObject in your scene.");
 
         // Store the initial health from the Inspector setup
@@ -52,7 +52,7 @@ public class Player_Stats_Tests : MonoBehaviour
     private void SetupEnemyStats()
     {
         // Find the EnemyStats component (if necessary for the test) and set any required values
-        var enemyStats = GameObject.FindObjectOfType<Enemy_Stats>();
+        var enemyStats = Object.FindFirstObjectByType<Enemy_Stats>();
         if (enemyStats == null)
         {
             enemyStats = new GameObject("Enemy").AddComponent<Enemy_Stats>(); // Ensure it's created for testing

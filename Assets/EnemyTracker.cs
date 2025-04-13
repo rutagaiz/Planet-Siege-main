@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class EnemyTracker : MonoBehaviour
 {
+
     private Transform worldObject;
     private RectTransform icon;
     private Camera minimapCamera;
@@ -27,12 +28,13 @@ public class EnemyTracker : MonoBehaviour
 
     void Update()
     {
+     /*   
         if (worldObject == null || icon == null || minimapCamera == null || minimapUI == null)
         {
             Destroy(icon.gameObject);
             return;
         }
-
+        */
         // Get world position and normalize within minimap bounds
         Vector3 worldPosition = worldObject.position;
         float normalizedX = Mathf.InverseLerp(mapStart.x, mapEnd.x, worldPosition.x);
