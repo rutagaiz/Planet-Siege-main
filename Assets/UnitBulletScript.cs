@@ -56,7 +56,7 @@ public class UnitBulletScript : MonoBehaviour
         }
 
         // Enemy unit bullet -> AllyUnit
-        if (bulletFaction == BulletFaction.Enemy && collision.gameObject.CompareTag("AllyUnits"))
+        if (bulletFaction == BulletFaction.Enemy && collision.gameObject.CompareTag("AllyTroop"))
         {
             if (collision.gameObject.TryGetComponent<HeavyScoutScript>(out var ally))
             {

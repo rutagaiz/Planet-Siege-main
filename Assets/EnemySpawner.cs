@@ -61,7 +61,7 @@ public class EnemySpawner : MonoBehaviour
         }
 
         // Attach minimap tracking component to enemy
-        EnemyTracker tracker = enemy.AddComponent<EnemyTracker>();
+        EnemyTracker tracker = enemy.GetComponent<EnemyTracker>();  
         tracker.Initialize(enemy.transform, iconTransform, minimapCamera, minimapUI);
     }
 
