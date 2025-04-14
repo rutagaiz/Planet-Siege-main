@@ -20951,7 +20951,7 @@ MonoBehaviour:
   canFire: 1
   timeBetweenFiring: 0.4
   maxAmmo: 50
-  ammoText: {fileID: 0}
+  ammoText: {fileID: 1448598954}
 --- !u!1 &1262855063
 GameObject:
   m_ObjectHideFlags: 0
