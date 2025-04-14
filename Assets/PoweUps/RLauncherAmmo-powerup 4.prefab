@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6504850475184556835}
   - component: {fileID: -8078369625137783208}
   - component: {fileID: -3025042508785371767}
-  - component: {fileID: 4687314784251255889}
+  - component: {fileID: -5249352498899537585}
   m_Layer: 0
-  m_Name: Ammo-powerup
+  m_Name: RLauncherAmmo-powerup 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -119,7 +119,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -135,7 +135,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.35, y: 0.35}
   m_EdgeRadius: 0
---- !u!114 &4687314784251255889
+--- !u!114 &-5249352498899537585
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,6 +144,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5024532287207128604}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f5824d6b384b7643ac0849e0f7cedc2, type: 3}
+  m_Script: {fileID: 11500000, guid: 6df36879b8c15b94281a8e4590114a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ammoCount: 20

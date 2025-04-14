@@ -22,7 +22,7 @@ public class Shooting : MonoBehaviour
         mainCam = Camera.main;
         currentAmmo = maxAmmo;
         UpdateAmmoUI();
-        Ammo.OnAmmoCollect += AddAmmo;
+        
     }
 
     public void Update()
@@ -78,8 +78,9 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    private void AddAmmo(int amount)
+    public void AddAmmo(int amount)
     {
-        currentAmmo += amount;
+        currentAmmo = Mathf.Min(currentAmmo + amount, maxAmmo);
+        UpdateAmmoUI();
     }
 }
