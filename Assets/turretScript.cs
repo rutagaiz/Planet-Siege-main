@@ -155,30 +155,70 @@ public class turretScript : MonoBehaviour
     private void Die()
     {
         isDestroyed = true;
-       // this.gameObject.SetActive(false); 
         Debug.Log($"{turretFaction} turret destroyed!");
-
+        
         if (turretFaction == TurretFaction.Enemy)
         {
             GameManager.Instance.AddTowerDestroyed();
         }
+        
+        // 🧨 1. Sunaikinam visus koliderius (vaikų taip pat!)
+        foreach (var col in GetComponentsInChildren<Collider2D>())
+        {
+            Destroy(col);
+        }
 
-        if (sr != null) sr.color = Color.gray;
-        if (col != null) col.enabled = false;
+        // 🧨 2. Sunaikinam visus Rigidbody2D (jei yra)
+        foreach (var rb in GetComponentsInChildren<Rigidbody2D>())
+        {
+            Destroy(rb);
+        }
 
-        // Kai nuimtas toweris pripliusuoja
+        // 🧨 3. Jei turi Tilemap ar navmesh komponentus
+        foreach (var comp in GetComponentsInChildren<Behaviour>())
+        {
+            if (comp.GetType().Name.Contains("Tilemap") || comp.GetType().Name.Contains("NavMesh"))
+            {
+                Destroy(comp);
+            }
+        }
+
+        // 4. Išjungiam šaudymą (vizualiai)
+        if (Gun != null)
+        {
+            Destroy(Gun);
+        }
+
+        // 5. Pakeičiam spalvą – liktų kaip "griuvėsiai"
+        if (sr != null)
+        {
+            sr.color = new Color(0.3f, 0.3f, 0.3f, 1f);
+            sr.sortingOrder = -1;
+        }
+
+        // 6. UI
+        if (towerHPUI != null)
+            towerHPUI.SetActive(false);
+
+        // 7. Statistikos + win/lose
         destroyedTowerCount++;
         OnTowerDestroyed?.Invoke(destroyedTowerCount);
 
         if (CompareTag("EnemyBase"))
         {
+            Debug.Log("✅ Pergalė – EnemyBase sunaikinta");
             ShowVictoryScreen();
         }
+
         if (CompareTag("AllyBase"))
         {
+            Debug.Log("❌ Pralaimėjimas – AllyBase sunaikinta");
             ShowDefeatScreen();
         }
+
+        gameObject.tag = "Untagged";
     }
+
 
     private Transform GetNearestTarget()
     {
