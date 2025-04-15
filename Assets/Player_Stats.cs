@@ -40,7 +40,7 @@ public class Player_Stats : MonoBehaviour
         ExperienceManager.Instance.OnChange -= HandleChange;
     }
 
-    public void HandleChange(int newExperience, int newCurrency)
+    public void HandleChange(int newCurrency, int newExperience)
     {
         currentExperience += newExperience;
         Currency += newCurrency;
