@@ -7,6 +7,9 @@ public class PauseManager : MonoBehaviour
     public GameObject spawnCanvas;
     public MonoBehaviour[] playerScriptsToDisable;
 
+    [SerializeField] private GameObject settingsPanel; 
+    private KeyRebinder keyRebinder;
+
     public static bool isPaused { get; private set; }
 
     void Awake()
@@ -14,17 +17,17 @@ public class PauseManager : MonoBehaviour
         isPaused = false;
         Time.timeScale = 1f;
 
-        if (pauseMenu != null)
-        {
-            pauseMenu.SetActive(false); //  Make sure it's hidden at start
-        }
+        // Initialize UI elements
+        if (pauseMenu) pauseMenu.SetActive(false);
+        if (spawnCanvas) spawnCanvas.SetActive(true);
 
-        if (spawnCanvas != null)
+        // Initialize SettingsPanel and its KeyRebinder
+        if (settingsPanel)
         {
-            spawnCanvas.SetActive(true); //  Ensure gameplay UI is visible
+            settingsPanel.SetActive(false);
+            var rebinder = settingsPanel.GetComponent<KeyRebinder>();
+            if (rebinder) rebinder.Initialize();
         }
-
-        EnsureUIState();
     }
 
     void Update()
@@ -41,10 +44,48 @@ public class PauseManager : MonoBehaviour
         if (spawnCanvas) spawnCanvas.SetActive(!isPaused);
     }
 
+    public void ToggleSettings()
+    {
+        if (settingsPanel != null)
+        {
+            bool showSettings = !settingsPanel.activeSelf;
+            settingsPanel.SetActive(showSettings);
+            pauseMenu.SetActive(!showSettings); // Hide main pause menu when settings are open
+        }
+    }
+
+    public void OpenSettings()
+    {
+        Debug.Log("Settings button clicked!"); // Check if this appears in Console
+        if (settingsPanel != null)
+        {
+            Debug.Log("SettingsPanel found: " + settingsPanel.name);
+            settingsPanel.SetActive(true);
+            pauseMenu.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("SettingsPanel reference is null!");
+        }
+    }
+
+    // Called by the "Return" button in settings
+    public void CloseSettings()
+    {
+        settingsPanel.SetActive(false);
+        pauseMenu.SetActive(true);
+    }
+
     public void TogglePause()
     {
         isPaused = !isPaused;
         Time.timeScale = isPaused ? 0f : 1f;
+
+
+        if (settingsPanel != null && settingsPanel.activeSelf)
+        {
+            settingsPanel.SetActive(false);
+        }
 
         // Force UI update immediately
         if (pauseMenu != null)
