@@ -66,7 +66,10 @@ public class Player_Stats : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
         UpdateHealthUI();
 
         if (currentHealth <= 0)

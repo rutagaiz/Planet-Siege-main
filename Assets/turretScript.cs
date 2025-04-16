@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using Random = UnityEngine.Random;
 
 public enum TurretFaction { Ally, Enemy }
 
@@ -56,6 +57,10 @@ public class turretScript : MonoBehaviour
     // Victory / Defeat screenai
     public GameOverScreen GameOverScreen;
     public Victory_screen Victory_screen;
+
+    [Header("PowerUps")]
+    public bool isSpecial = false;
+    public List<PowerUp> powerUps = new List<PowerUp>();
 
     public void Initialize() //for testing, does what start did previously but public possible call
     {
@@ -154,6 +159,24 @@ public class turretScript : MonoBehaviour
 
     private void Die()
     {
+        if (isSpecial)
+        {
+            foreach (PowerUp powerUp in powerUps)
+            {
+                ShowPowerUp(powerUp.itemPrefab);
+            }
+        }
+        else
+        {
+            foreach (PowerUp powerUp in powerUps)
+            {
+                if (Random.Range(0f, 100f) <= powerUp.dropChance)
+                {
+                    ShowPowerUp(powerUp.itemPrefab);
+                    break;
+                }
+            }
+        }
         isDestroyed = true;
         Debug.Log($"{turretFaction} turret destroyed!");
         
@@ -219,6 +242,14 @@ public class turretScript : MonoBehaviour
         gameObject.tag = "Untagged";
     }
 
+    void ShowPowerUp(GameObject powerUp)
+    {
+        if (powerUp)
+        {
+            GameObject droppedLoot = Instantiate(powerUp, transform.position, Quaternion.identity);
+
+        }
+    }
 
     private Transform GetNearestTarget()
     {

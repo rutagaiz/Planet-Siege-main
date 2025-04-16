@@ -1598,6 +1598,8 @@ MonoBehaviour:
   healthText: {fileID: 0}
   GameOverScreen: {fileID: 0}
   Victory_screen: {fileID: 0}
+  isSpecial: 0
+  powerUps: []
 --- !u!60 &285744069
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -2009,6 +2011,20 @@ MonoBehaviour:
   healthText: {fileID: 0}
   GameOverScreen: {fileID: 0}
   Victory_screen: {fileID: 0}
+  isSpecial: 0
+  powerUps:
+  - itemPrefab: {fileID: 8655725591735900990, guid: 479f0b5a7d2c9e94ca6e5fdcdd5df057, type: 3}
+    dropChance: 30
+  - itemPrefab: {fileID: 5024532287207128604, guid: d13f5cacd9b73b84f91e28aac1f72658, type: 3}
+    dropChance: 30
+  - itemPrefab: {fileID: 5024532287207128604, guid: c13ac83152eeef24986c560f494f94b8, type: 3}
+    dropChance: 30
+  - itemPrefab: {fileID: 5024532287207128604, guid: 29933b134ff7d5e4ab26755a1335fe94, type: 3}
+    dropChance: 30
+  - itemPrefab: {fileID: 5024532287207128604, guid: a116eeddbd26c384b9ad411bbe39cc6b, type: 3}
+    dropChance: 30
+  - itemPrefab: {fileID: 5024532287207128604, guid: 7eb5fde9c7540734299dc4a3c25d8b73, type: 3}
+    dropChance: 30
 --- !u!60 &328466651
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -2959,6 +2975,8 @@ MonoBehaviour:
   healthText: {fileID: 0}
   GameOverScreen: {fileID: 0}
   Victory_screen: {fileID: 0}
+  isSpecial: 0
+  powerUps: []
 --- !u!60 &493078959
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -3258,6 +3276,20 @@ MonoBehaviour:
   healthText: {fileID: 0}
   GameOverScreen: {fileID: 0}
   Victory_screen: {fileID: 0}
+  isSpecial: 0
+  powerUps:
+  - itemPrefab: {fileID: 8655725591735900990, guid: 479f0b5a7d2c9e94ca6e5fdcdd5df057, type: 3}
+    dropChance: 30
+  - itemPrefab: {fileID: 5024532287207128604, guid: d13f5cacd9b73b84f91e28aac1f72658, type: 3}
+    dropChance: 30
+  - itemPrefab: {fileID: 5024532287207128604, guid: c13ac83152eeef24986c560f494f94b8, type: 3}
+    dropChance: 30
+  - itemPrefab: {fileID: 5024532287207128604, guid: 29933b134ff7d5e4ab26755a1335fe94, type: 3}
+    dropChance: 30
+  - itemPrefab: {fileID: 5024532287207128604, guid: a116eeddbd26c384b9ad411bbe39cc6b, type: 3}
+    dropChance: 30
+  - itemPrefab: {fileID: 5024532287207128604, guid: 7eb5fde9c7540734299dc4a3c25d8b73, type: 3}
+    dropChance: 30
 --- !u!60 &501661363
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -4697,6 +4729,20 @@ MonoBehaviour:
   healthText: {fileID: 0}
   GameOverScreen: {fileID: 0}
   Victory_screen: {fileID: 0}
+  isSpecial: 0
+  powerUps:
+  - itemPrefab: {fileID: 8655725591735900990, guid: 479f0b5a7d2c9e94ca6e5fdcdd5df057, type: 3}
+    dropChance: 30
+  - itemPrefab: {fileID: 5024532287207128604, guid: d13f5cacd9b73b84f91e28aac1f72658, type: 3}
+    dropChance: 30
+  - itemPrefab: {fileID: 5024532287207128604, guid: c13ac83152eeef24986c560f494f94b8, type: 3}
+    dropChance: 30
+  - itemPrefab: {fileID: 5024532287207128604, guid: 29933b134ff7d5e4ab26755a1335fe94, type: 3}
+    dropChance: 30
+  - itemPrefab: {fileID: 5024532287207128604, guid: a116eeddbd26c384b9ad411bbe39cc6b, type: 3}
+    dropChance: 30
+  - itemPrefab: {fileID: 5024532287207128604, guid: 7eb5fde9c7540734299dc4a3c25d8b73, type: 3}
+    dropChance: 30
 --- !u!60 &717496344
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -17771,6 +17817,8 @@ MonoBehaviour:
   healthText: {fileID: 0}
   GameOverScreen: {fileID: 0}
   Victory_screen: {fileID: 0}
+  isSpecial: 0
+  powerUps: []
 --- !u!60 &776138860
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -19085,6 +19133,20 @@ MonoBehaviour:
   healthText: {fileID: 0}
   GameOverScreen: {fileID: 0}
   Victory_screen: {fileID: 0}
+  isSpecial: 1
+  powerUps:
+  - itemPrefab: {fileID: 8655725591735900990, guid: 2f26b632e5f07eb4280c488c9ee0670b, type: 3}
+    dropChance: 0
+  - itemPrefab: {fileID: 5024532287207128604, guid: c13ac83152eeef24986c560f494f94b8, type: 3}
+    dropChance: 0
+  - itemPrefab: {fileID: 5024532287207128604, guid: 29933b134ff7d5e4ab26755a1335fe94, type: 3}
+    dropChance: 0
+  - itemPrefab: {fileID: 5024532287207128604, guid: d13f5cacd9b73b84f91e28aac1f72658, type: 3}
+    dropChance: 0
+  - itemPrefab: {fileID: 5024532287207128604, guid: a116eeddbd26c384b9ad411bbe39cc6b, type: 3}
+    dropChance: 0
+  - itemPrefab: {fileID: 5024532287207128604, guid: 7eb5fde9c7540734299dc4a3c25d8b73, type: 3}
+    dropChance: 0
 --- !u!60 &870030991
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -19567,6 +19629,8 @@ MonoBehaviour:
   healthText: {fileID: 0}
   GameOverScreen: {fileID: 0}
   Victory_screen: {fileID: 0}
+  isSpecial: 0
+  powerUps: []
 --- !u!60 &894962285
 PolygonCollider2D:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3907519131485913589}
   - component: {fileID: 592316579596427496}
   m_Layer: 0
-  m_Name: Medkit-poweup
+  m_Name: BigMedkit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 261eee2d36d3f8748a6381be5305af0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpValue: 10
+  hpValue: 100
 --- !u!61 &592316579596427496
 BoxCollider2D:
   m_ObjectHideFlags: 0

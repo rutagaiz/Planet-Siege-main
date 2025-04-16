@@ -194,6 +194,10 @@ MonoBehaviour:
   MaxHealth: 500
   moveSpeed: 2
   rb: {fileID: 1389573655424351393}
+  expAmount: 10
+  powerUps:
+  - itemPrefab: {fileID: 0}
+    dropChance: 0
 --- !u!114 &3364149465806408189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,6 +224,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 516782520773423697, guid: fb08d7d9f482df74585ca0d1b0e2c464, type: 3}
   shootPoint: {fileID: 7910436423520128446}
   faction: 1
+  HasTarget: 0
 --- !u!1 &3195495812476256354
 GameObject:
   m_ObjectHideFlags: 0

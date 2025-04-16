@@ -218,19 +218,20 @@ MonoBehaviour:
   moveSpeed: 5
   rb: {fileID: 4660287111455160428}
   expAmount: 10
+  isSpecial: 0
   powerUps:
   - itemPrefab: {fileID: 8655725591735900990, guid: 479f0b5a7d2c9e94ca6e5fdcdd5df057, type: 3}
-    dropChance: 0
+    dropChance: 15
   - itemPrefab: {fileID: 5024532287207128604, guid: d13f5cacd9b73b84f91e28aac1f72658, type: 3}
-    dropChance: 30
+    dropChance: 15
   - itemPrefab: {fileID: 5024532287207128604, guid: a116eeddbd26c384b9ad411bbe39cc6b, type: 3}
-    dropChance: 0
+    dropChance: 15
   - itemPrefab: {fileID: 5024532287207128604, guid: 29933b134ff7d5e4ab26755a1335fe94, type: 3}
-    dropChance: 30
+    dropChance: 15
   - itemPrefab: {fileID: 5024532287207128604, guid: c13ac83152eeef24986c560f494f94b8, type: 3}
-    dropChance: 30
+    dropChance: 15
   - itemPrefab: {fileID: 5024532287207128604, guid: 7eb5fde9c7540734299dc4a3c25d8b73, type: 3}
-    dropChance: 10
+    dropChance: 15
 --- !u!114 &8960160820837598248
 MonoBehaviour:
   m_ObjectHideFlags: 0

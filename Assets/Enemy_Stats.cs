@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -20,6 +21,7 @@ public class Enemy_Stats : MonoBehaviour
     int currencyAmount = 10;
 
     [Header("PowerUps")]
+    public bool isSpecial = false;
     public List<PowerUp> powerUps = new List<PowerUp>();
 
     public void FixedUpdate()
@@ -54,20 +56,31 @@ public class Enemy_Stats : MonoBehaviour
         }
     }
 
-   
-    
+
+
     void Die()
     {
-        foreach(PowerUp powerUp in powerUps)
+        if (isSpecial)
         {
-            if (Random.Range(0f, 100f) <= powerUp.dropChance)
+            foreach (PowerUp powerUp in powerUps)
             {
-                ShowPowerUp(powerUp.itemPrefab);
-                break;
+                 ShowPowerUp(powerUp.itemPrefab);
             }
-            
         }
-        Destroy(gameObject);
+        else
+        {
+            foreach (PowerUp powerUp in powerUps)
+            {
+                if (Random.Range(0f, 100f) <= powerUp.dropChance)
+                {
+                    ShowPowerUp(powerUp.itemPrefab);
+                    break;
+                }
+            }
+        }
+
+
+            Destroy(gameObject);
         ExperienceManager.Instance.Add(expAmount, currencyAmount);
         GameManager.Instance.AddEnemyDefeated(); // Notify stats manager
     }
