@@ -6,27 +6,25 @@ public class Player_movement : MonoBehaviour
     public float moveSpeed = 5f;
     public bool facingRight = true;
     public Rigidbody2D rb;
-    public float flySpeed = 5f;
-    public float fallSpeed = 5f;
-    public float maxY = 11f;
+    public float flySpeed = 5f; // Unused now
+    public float fallSpeed = 5f; // Unused now
+    public float maxY = 11f; // Unused for flying, but kept
     public GameManager cm;
 
-    // References to sprite renderers
     public SpriteRenderer helmetSpriteRenderer;
     public SpriteRenderer torsoSpriteRenderer;
 
-    public bool simulateWPressed = false;
-    public bool simulateSPressed = false;
+    public bool simulateWPressed = false; // Unused now
+    public bool simulateSPressed = false; // Unused now
 
+    private int jumpCount = 0;
+    private int maxJumps = 2;
+    public float jumpForce = 10f; 
 
     public void Start()
     {
-        // LOCK rotation so player NEVER tilts or spins
         rb.freezeRotation = true;
 
-        // Get the SpriteRenderer components
-
-        // Find the helmet child object
         Transform helmet = transform.Find("helmet_0");
         if (helmet != null)
         {
@@ -41,7 +39,6 @@ public class Player_movement : MonoBehaviour
             Debug.LogError("Helmet child object not found!");
         }
 
-        // Find the torso child object
         Transform torso = transform.Find("torso");
         if (torso != null)
         {
@@ -61,7 +58,6 @@ public class Player_movement : MonoBehaviour
     {
         movement = Input.GetAxis("Horizontal");
 
-        // Flip left/right
         if (movement < 0f && facingRight)
         {
             Flip(false);
@@ -71,20 +67,10 @@ public class Player_movement : MonoBehaviour
             Flip(true);
         }
 
-        if ((Input.GetKey(KeyCode.W) || simulateWPressed) && transform.position.y < maxY)
+        // Jumping logic
+        if ((Input.GetKeyDown(KeyCode.W) || simulateWPressed) && jumpCount < maxJumps)
         {
-            FlyUp();
-        }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            FlyDown();
-        }
-
-        if (transform.position.y >= maxY)
-        {
-            transform.position = new Vector3(transform.position.x, maxY, transform.position.z);
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
+            Jump();
         }
     }
 
@@ -93,47 +79,48 @@ public class Player_movement : MonoBehaviour
         rb.linearVelocity = new Vector2(movement * moveSpeed, rb.linearVelocity.y);
     }
 
-    // Flip both torso and helmet
     public void Flip(bool faceRight)
     {
         facingRight = faceRight;
 
-        // Flip torso sprite if it exists
         if (torsoSpriteRenderer != null)
         {
             torsoSpriteRenderer.flipX = !faceRight;
         }
 
-
-        // Flip helmet sprite if it exists
         if (helmetSpriteRenderer != null)
         {
             helmetSpriteRenderer.flipX = !faceRight;
         }
     }
 
-    public void FlyUp()
+    public void Jump()
     {
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, flySpeed);
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f); 
+        rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+        jumpCount++;
     }
 
-    public void FlyDown()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, -fallSpeed);
+        if (collision.contacts[0].normal.y > 0.5f)
+        {
+            jumpCount = 0;
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Coin"))
         {
-            GameManager.Instance.AddCoin(1); 
-            //Destroy(other.gameObject);      
+            GameManager.Instance.AddCoin(1);
+            //Destroy(other.gameObject);
         }
     }
 
     public void TestMove(float horizontalInput)
     {
         movement = horizontalInput;
-        FixedUpdate(); // Directly call physics update
+        FixedUpdate(); 
     }
 }

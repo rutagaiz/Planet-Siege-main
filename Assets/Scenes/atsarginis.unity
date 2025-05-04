@@ -21883,7 +21883,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Project X
+  m_text: Planet Siege
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 9ad269c99dcf42b7aedefd83dd5a7b9d, type: 2}
@@ -25329,14 +25329,15 @@ MonoBehaviour:
   moveSpeed: 7
   facingRight: 1
   rb: {fileID: 1522584311}
-  flySpeed: 6
-  fallSpeed: 6
+  flySpeed: 5
+  fallSpeed: 5
   maxY: 13
   cm: {fileID: 2123939017}
   helmetSpriteRenderer: {fileID: 0}
   torsoSpriteRenderer: {fileID: 0}
   simulateWPressed: 0
   simulateSPressed: 0
+  jumpForce: 10
 --- !u!114 &1522584314
 MonoBehaviour:
   m_ObjectHideFlags: 0
