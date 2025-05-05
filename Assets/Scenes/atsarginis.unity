@@ -23277,6 +23277,7 @@ MonoBehaviour:
   offset: {x: 0, y: 0, z: 0}
   dampening: 0.5
   target: {fileID: 1522584312}
+  manualMoveSpeed: 5
 --- !u!1 &1311813308
 GameObject:
   m_ObjectHideFlags: 0
@@ -23891,7 +23892,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Coin count
+  m_Text: 'Coin count: 0'
 --- !u!222 &1331662972
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -25352,6 +25353,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 1695449774}
   slider1: {fileID: 29171909}
+  currencyText: {fileID: 1331662971}
   Currency: 100
   currentHealth: 10
   maxHealth: 10
@@ -31075,7 +31077,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2118921548
 MonoBehaviour:
   m_ObjectHideFlags: 0
