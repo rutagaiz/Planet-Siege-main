@@ -9,6 +9,7 @@ public class Player_Stats : MonoBehaviour
     private Vector2 respawnPoint;
     public Slider slider;
     public Slider slider1;
+    public Text currencyText;
 
     [SerializeField]
     public int Currency = 100;
@@ -45,6 +46,7 @@ public class Player_Stats : MonoBehaviour
         currentExperience += newExperience;
         Currency += newCurrency;
         UpdateXpUI();
+        UpdateCurrencyUI();
 
         if (currentExperience >= maxExperience)
         {
@@ -114,6 +116,7 @@ public class Player_Stats : MonoBehaviour
         if (Currency >= amount)
         {
             Currency -= amount;
+            UpdateCurrencyUI();
             return true;
         }
         return false;
@@ -122,5 +125,14 @@ public class Player_Stats : MonoBehaviour
     public void AddCurrency(int amount)
     {
         Currency += amount;
+        UpdateCurrencyUI();
+    }
+
+    private void UpdateCurrencyUI()
+    {
+        if (currencyText != null)
+        {
+            currencyText.text = "Coin count: " + Currency.ToString();
+        }
     }
 }
