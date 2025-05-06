@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
 
+
 public class Shooting : MonoBehaviour
 {
     private Camera mainCam;
@@ -64,6 +65,7 @@ public class Shooting : MonoBehaviour
         if (canFire && currentAmmo > 0)
         {
             canFire = false;
+            SoundManager.Instance.PlayGunSound();
             Instantiate(bullet, bulletTransform.position, Quaternion.identity);
             currentAmmo--;
             UpdateAmmoUI();

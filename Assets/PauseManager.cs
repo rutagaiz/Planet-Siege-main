@@ -25,13 +25,17 @@ public class PauseManager : MonoBehaviour
         }
 
         EnsureUIState();
+        SoundManager.Instance.PlayLevel1Music();
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            if(isPaused == false)
             TogglePause();
+            else
+            ResumeGame();
         }
     }
 
@@ -45,7 +49,6 @@ public class PauseManager : MonoBehaviour
     {
         isPaused = !isPaused;
         Time.timeScale = isPaused ? 0f : 1f;
-
         // Force UI update immediately
         if (pauseMenu != null)
         {
@@ -75,6 +78,8 @@ public class PauseManager : MonoBehaviour
                 stats.UpdateStats();
             }
         }
+        SoundManager.Instance.StopBackgroundMusic();
+        SoundManager.Instance.PlayMenuMusic();
     }
 
 
@@ -84,6 +89,8 @@ public class PauseManager : MonoBehaviour
         if (isPaused)
         {
             TogglePause(); // Unpauses the game
+            SoundManager.Instance.StopMenuMusic();
+            SoundManager.Instance.PlayLevel1Music();
         }
     }
 
@@ -111,6 +118,7 @@ public class PauseManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu"); // Replace with your main menu scene name
+        SoundManager.Instance.PlayMenuMusic();
     }
 
     public void QuitGame()
