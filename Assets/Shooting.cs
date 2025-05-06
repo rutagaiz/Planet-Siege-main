@@ -63,6 +63,7 @@ public class Shooting : MonoBehaviour
     {
         if (canFire && currentAmmo > 0)
         {
+            SoundManager.Instance.PlayGunSound();
             canFire = false;
             Instantiate(bullet, bulletTransform.position, Quaternion.identity);
             currentAmmo--;
