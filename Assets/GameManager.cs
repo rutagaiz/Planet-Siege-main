@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
     public void UpdateCoinUI()
     {
         if (coinText != null)
-            coinText.text = "Money: " + coinCount;
+            coinText.text = "Coin count: " + coinCount;
     }
 
     public void AddCoin(int amount)
