@@ -33,7 +33,6 @@ public class BulletScript : MonoBehaviour
         if (collision.gameObject.TryGetComponent<Enemy_Stats>(out Enemy_Stats enemy))
         {
             enemy.TakeDamage(bullet_Damage);
-            Destroy(gameObject);
         }
 
         if (collision.gameObject.CompareTag("EnemyTurret") || collision.gameObject.CompareTag("EnemyBase"))
@@ -42,8 +41,7 @@ public class BulletScript : MonoBehaviour
             {
                 turret.TakeDamage((int)bullet_Damage);
             }
-
-            Destroy(gameObject);
         }
+            Destroy(gameObject);
     }
 }

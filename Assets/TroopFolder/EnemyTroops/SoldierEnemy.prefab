@@ -213,8 +213,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 998fe0c8480ccaf48b013522f32e9454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  MaxHealth: 100
+  health: 10
+  MaxHealth: 10
   moveSpeed: 5
   rb: {fileID: 4660287111455160428}
   expAmount: 10

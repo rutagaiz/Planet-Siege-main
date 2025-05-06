@@ -221,11 +221,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 998fe0c8480ccaf48b013522f32e9454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 300
-  MaxHealth: 300
+  health: 30
+  MaxHealth: 30
   moveSpeed: 4
   rb: {fileID: 3423969038885707166}
   expAmount: 10
+  isSpecial: 0
   powerUps:
   - itemPrefab: {fileID: 8655725591735900990, guid: 479f0b5a7d2c9e94ca6e5fdcdd5df057, type: 3}
     dropChance: 20

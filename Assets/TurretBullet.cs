@@ -65,7 +65,7 @@ public class TurretBullet : MonoBehaviour
         }
 
         // Jei pataikė į priešą
-        if (bulletFaction == BulletFaction.Ally && collision.gameObject.CompareTag("EnemyUnits"))
+        if (bulletFaction == BulletFaction.Ally && collision.gameObject.CompareTag("EnemyTroop"))
         {
             if (collision.gameObject.TryGetComponent<Enemy_Stats>(out Enemy_Stats enemy))
             {
