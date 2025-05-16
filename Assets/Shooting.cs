@@ -63,7 +63,7 @@ public class Shooting : MonoBehaviour
     {
         if (canFire && currentAmmo > 0)
         {
-            SoundManager.Instance.PlayGunSound();
+            //SoundManager.Instance.PlayGunSound();
             canFire = false;
             GameObject spawnedBullet = Instantiate(bullet, bulletTransform.position, Quaternion.identity);
             OnBulletInstantiated?.Invoke(spawnedBullet, bulletTransform.position, Quaternion.identity);
