@@ -7,9 +7,9 @@ public class Shooting : MonoBehaviour
     private Vector3 mousePos;
     public GameObject bullet;
     public Transform bulletTransform;
-
+    public static System.Action<GameObject, Vector3, Quaternion> OnBulletInstantiated;
     public bool canFire;
-    private float timer;
+    public float timer;
     public float timeBetweenFiring;
 
     [SerializeField] private int maxAmmo = 10;
@@ -65,7 +65,8 @@ public class Shooting : MonoBehaviour
         {
             SoundManager.Instance.PlayGunSound();
             canFire = false;
-            Instantiate(bullet, bulletTransform.position, Quaternion.identity);
+            GameObject spawnedBullet = Instantiate(bullet, bulletTransform.position, Quaternion.identity);
+            OnBulletInstantiated?.Invoke(spawnedBullet, bulletTransform.position, Quaternion.identity);
             currentAmmo--;
             UpdateAmmoUI();
         }
