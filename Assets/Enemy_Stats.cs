@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -11,6 +12,9 @@ public class Enemy_Stats : MonoBehaviour
     private GUnitGunScript GUnitGunScript;
     private bool HasTarget; 
     [SerializeField] float health, MaxHealth = 3f;
+    public GameObject popUpDamagePrefab;
+    public TMP_Text popUpText;
+    public float popupYOffset = 1f;
 
     [SerializeField] float moveSpeed = 5f;
 
@@ -54,6 +58,13 @@ public class Enemy_Stats : MonoBehaviour
             damageAmount *= 2;
         }
         health -= damageAmount;
+        popUpText.text = damageAmount.ToString();
+        
+        GameObject popup = Instantiate(popUpDamagePrefab, transform.position, Quaternion.identity);
+        DamagePopUp popupScript = popup.AddComponent<DamagePopUp>();
+        popupScript.target = transform;
+        popupScript.offset = new Vector3(0, 1f, 0);
+        
         if (health <= 0)
         {
             Die();

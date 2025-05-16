@@ -192,6 +192,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 50
   MaxHealth: 50
+  popUpDamagePrefab: {fileID: 3599036577868259552, guid: 0f7d9b57533742d41b6de0e40d539fd8, type: 3}
+  popUpText: {fileID: 7169697728651622656, guid: 0f7d9b57533742d41b6de0e40d539fd8, type: 3}
+  popupYOffset: 1
   moveSpeed: 2
   rb: {fileID: 1389573655424351393}
   expAmount: 10
