@@ -15,6 +15,8 @@ public class Enemy_Stats : MonoBehaviour
     public GameObject popUpDamagePrefab;
     public TMP_Text popUpText;
     public float popupYOffset = 1f;
+    private HealthBarUI healthUI;
+    [SerializeField] private GameObject healthBarPrefab;
 
     [SerializeField] float moveSpeed = 5f;
 
@@ -49,6 +51,24 @@ public class Enemy_Stats : MonoBehaviour
     private void Start()
     {
         health = MaxHealth;
+        
+        // GameObject canvasInstance = Instantiate(healthBarPrefab, transform);
+        // canvasInstance.transform.localPosition = new Vector3(0, 0.5f, 0); // or whatever offset works
+        // healthUI = canvasInstance.GetComponentInChildren<HealthBarUI>();
+        // healthUI.Initialize(transform, (int)MaxHealth);
+        
+        GameObject healthBarInstance = Instantiate(healthBarPrefab, transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+        healthBarInstance.transform.SetParent(transform); // Make enemy the parent
+    
+        healthUI = healthBarInstance.GetComponentInChildren<HealthBarUI>();
+        if (healthUI == null)
+        {
+            Debug.LogError("HealthBarUI component not found on health bar prefab!");
+            return;
+        }
+    
+        healthUI.Initialize(transform, MaxHealth);
+        healthUI.SetHealth(health, MaxHealth); // Explicitly set initial health
     }
 
     public void TakeDamage(float damageAmount)
@@ -59,6 +79,19 @@ public class Enemy_Stats : MonoBehaviour
         }
         health -= damageAmount;
         popUpText.text = damageAmount.ToString();
+        // healthUI?.SetHealth((int)health, (int)MaxHealth);
+        
+        health = Mathf.Clamp(health, 0, MaxHealth); 
+        if (healthUI != null)
+        {
+            healthUI.SetHealth(health, MaxHealth);
+        }
+        else
+        {
+            Debug.LogWarning("HealthUI reference is null!");
+        }
+
+
         
         GameObject popup = Instantiate(popUpDamagePrefab, transform.position, Quaternion.identity);
         DamagePopUp popupScript = popup.AddComponent<DamagePopUp>();

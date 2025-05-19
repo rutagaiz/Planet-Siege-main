@@ -1133,6 +1133,7 @@ MonoBehaviour:
   bullet: {fileID: 516782520773423697, guid: 418180ba6b026e5448f32e9e1efe9667, type: 3}
   bulletTransform: {fileID: 2000116959}
   canFire: 1
+  timer: 0
   timeBetweenFiring: 1.3
   maxAmmo: 15
   ammoText: {fileID: 1448598954}
@@ -2638,6 +2639,7 @@ MonoBehaviour:
   bullet: {fileID: 516782520773423697, guid: db7aafa896d95c94291ac99c2c2198af, type: 3}
   bulletTransform: {fileID: 860486355}
   canFire: 1
+  timer: 0
   timeBetweenFiring: 0.1
   maxAmmo: 300
   ammoText: {fileID: 1448598954}
@@ -3774,6 +3776,7 @@ MonoBehaviour:
   bullet: {fileID: 516782520773423697, guid: 9fd0c7cd8ef17d44bb9a1fcd0fcd9600, type: 3}
   bulletTransform: {fileID: 700545818}
   canFire: 1
+  timer: 0
   timeBetweenFiring: 0.7
   maxAmmo: 30
   ammoText: {fileID: 1448598954}
@@ -23047,6 +23050,7 @@ MonoBehaviour:
   bullet: {fileID: 516782520773423697, guid: 95f8f574ab59c024696f8ce1da2f2948, type: 3}
   bulletTransform: {fileID: 1758981442}
   canFire: 1
+  timer: 0
   timeBetweenFiring: 0.4
   maxAmmo: 50
   ammoText: {fileID: 1448598954}
@@ -29564,6 +29568,7 @@ MonoBehaviour:
   bullet: {fileID: 516782520773423697, guid: 13990aa3f7e277a44ade54e4e1df6aa3, type: 3}
   bulletTransform: {fileID: 1996891947}
   canFire: 1
+  timer: 0
   timeBetweenFiring: 0.3
   maxAmmo: 100
   ammoText: {fileID: 1448598954}
