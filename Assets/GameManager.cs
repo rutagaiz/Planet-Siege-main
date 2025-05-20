@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     // Public stats
     public int coinCount = 0;
     public int XP = 0;
-    public int skill = 1;
+    public int skill = 0;
 
     public float TimePlayed { get; private set; }
     public int EnemiesDefeated { get; private set; }
@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
         EnemiesDefeated = 0;
         TowersDestroyed = 0;
         coinCount = 0;
-        skill = 1;
+        skill = 0;
         destroyedTowers.Clear();
     }
 

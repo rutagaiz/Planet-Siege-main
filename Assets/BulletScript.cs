@@ -8,9 +8,17 @@ public class BulletScript : MonoBehaviour
 
     private Camera mainCam;
     private Rigidbody2D rb;
+    private int dammageMultiplier = 1;
+ 
 
     void Start()
     {
+        Player_Stats playerStats = Object.FindFirstObjectByType<Player_Stats>();
+        if (playerStats != null)
+        {
+            playerStats.OnDamageChanged += UpdateDamageMultiplier;
+        }
+
         mainCam = Camera.main;
         rb = GetComponent<Rigidbody2D>();
 
@@ -27,12 +35,16 @@ public class BulletScript : MonoBehaviour
         // Destroy bullet after lifetime
         Destroy(gameObject, lifetime);
     }
+    private void UpdateDamageMultiplier(int newDamage)
+    {
+        dammageMultiplier = newDamage;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.TryGetComponent<Enemy_Stats>(out Enemy_Stats enemy))
         {
-            enemy.TakeDamage(bullet_Damage);
+            enemy.TakeDamage(bullet_Damage + dammageMultiplier);
         }
 
         if (collision.gameObject.CompareTag("EnemyTurret") || collision.gameObject.CompareTag("EnemyBase"))

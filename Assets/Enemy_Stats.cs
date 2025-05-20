@@ -74,14 +74,12 @@ public class Enemy_Stats : MonoBehaviour
 
     public void TakeDamage(float damageAmount)
     {
-        if (Random.RandomRange(0,100) == 0 || Random.RandomRange(0, 100) == 1) // 2% critical
+        if (Random.Range(0,100) == 0 || Random.Range(0, 100) == 1) // 2% critical
         {
             damageAmount *= 2;
         }
         health -= damageAmount;
         popUpText.text = damageAmount.ToString();
-        // healthUI?.SetHealth((int)health, (int)MaxHealth);
-        
         health = Mathf.Clamp(health, 0, MaxHealth); 
         if (healthUI != null)
         {
