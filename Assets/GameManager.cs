@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,13 +9,15 @@ public class GameManager : MonoBehaviour
 
     // Public stats
     public int coinCount = 0;
-    public Text coinText; // This gets destroyed when scene reloads!
+    public int XP = 0;
+    public int skill = 1;
 
     public float TimePlayed { get; private set; }
     public int EnemiesDefeated { get; private set; }
-
-
+    
     public int TowersDestroyed { get; private set; }
+    
+    private HashSet<string> destroyedTowers = new();
 
     void Awake()
     {
@@ -36,7 +39,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (coinText == null) FindCoinText(); // Auto-fix missing reference
 
         if (!PauseManager.isPaused)
         {
@@ -46,42 +48,59 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        FindCoinText();
-        UpdateCoinUI(); // Ensures UI updates properly
-    }
-
-
-    private void FindCoinText()
-    {
-        if (coinText == null)
-        {
-            GameObject coinTextObject = GameObject.Find("CoinText"); // Make sure the UI element is named correctly
-            if (coinTextObject != null)
-                coinText = coinTextObject.GetComponent<Text>();
-        }
+        DisableDestroyedTowers();
     }
 
     public void ResetAllStats()
     {
         TimePlayed = 0f;
+        XP = 0;
         EnemiesDefeated = 0;
         TowersDestroyed = 0;
         coinCount = 0;
-        UpdateCoinUI();
-    }
-
-    public void UpdateCoinUI()
-    {
-        if (coinText != null)
-            coinText.text = "Coin count: " + coinCount;
+        skill = 1;
+        destroyedTowers.Clear();
     }
 
     public void AddCoin(int amount)
     {
         coinCount += amount;
-        UpdateCoinUI();
     }
 
+    public void AddSkill(int amount)
+    {
+        skill += amount;
+    }
+    
+    public void AddXP(int amount)
+    {
+        XP += amount;
+    }
+    
+    private void DisableDestroyedTowers()
+    {
+        foreach (var obj in GameObject.FindGameObjectsWithTag("EnemyTurret"))
+        {
+            if (destroyedTowers.Contains(obj.name))
+            {
+                obj.SetActive(false);
+            }
+        }
+    }
+
+
     public virtual void AddEnemyDefeated() => EnemiesDefeated++;
-    public void AddTowerDestroyed() => TowersDestroyed++;
+    //public void AddTowerDestroyed() => TowersDestroyed++;
+    
+    public void AddTowerDestroyed(GameObject tower)
+    {
+        TowersDestroyed++;
+        destroyedTowers.Add(tower.name);
+    }
+    
+    public void ResetXP()
+    {
+        XP = 0;
+    }
 }
+
