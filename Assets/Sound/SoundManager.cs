@@ -8,6 +8,8 @@ public class SoundManager : MonoBehaviour
     public AudioSource Menu;
     public AudioSource Gun;
 
+    
+
     void Awake()
     {
         // Singleton setup
