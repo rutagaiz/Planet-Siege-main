@@ -1,9 +1,13 @@
+using System;
 using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Player_Stats : MonoBehaviour
 {
+
+    public event Action<int> OnDamageChanged;
+
     public static Player_Stats Instance;
 
     private Vector2 respawnPoint;
@@ -17,7 +21,7 @@ public class Player_Stats : MonoBehaviour
 
     [SerializeField]
     int currentHealth, maxHealth, maxExperience = 100, currentLevel, attackDamage, Speed, skillPoints;
-    
+
     public GameOverScreen GameOverScreen;
 
     private void Awake()
@@ -34,6 +38,29 @@ public class Player_Stats : MonoBehaviour
         // Skill points UI
         UpdateSkillUI();
         Medkit.OnMedkitCollect += TakeDamage;
+    }
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Keypad1) && skillPoints >= 1)
+        {
+            skillPoints--;
+            maxHealth += 10;
+            currentHealth = maxHealth;
+            UpdateSkillUI();
+        }
+        if (Input.GetKey(KeyCode.Keypad2) && skillPoints >= 1)
+        {
+            skillPoints--;
+            attackDamage += 1;
+            OnDamageChanged?.Invoke(attackDamage);
+            UpdateSkillUI();
+        }
+        if (Input.GetKey(KeyCode.Keypad3) && skillPoints >= 1)
+        {
+            skillPoints--;
+            Speed += 1;
+            UpdateSkillUI();
+        }
     }
 
     private void OnEnable()
@@ -52,22 +79,21 @@ public class Player_Stats : MonoBehaviour
         GameManager.Instance.AddCoin(newCurrency);
         UpdateXpUI();
         UpdateCurrencyUI();
-        // Skill points UI
-        UpdateSkillUI();
 
         if (GameManager.Instance.XP >= maxExperience)
         {
             LevelUp();
+            UpdateSkillUI();
         }
     }
 
     private void LevelUp()
     {
-        skillPoints += 1;
         currentHealth = maxHealth;
         GameManager.Instance.ResetXP();
-        maxExperience += 100;
+        maxExperience += 20;
         currentLevel += 1;
+        skillPoints += 1;
         UpdateHealthUI();
         UpdateXpUI();
     }
@@ -108,7 +134,6 @@ public class Player_Stats : MonoBehaviour
             slider.value = currentHealth;
         }
     }
-
     private void UpdateXpUI()
     {
         if (slider1 != null)
@@ -134,13 +159,13 @@ public class Player_Stats : MonoBehaviour
         GameManager.Instance.AddCoin(amount);
         UpdateCurrencyUI();
     }
-    
+
     // Skill pointsam Add()
     public void AddSkillPoint(int amount)
     {
         GameManager.Instance.AddSkill(amount);
     }
-    
+
     private void UpdateCurrencyUI()
     {
         if (currencyText != null)
@@ -148,13 +173,18 @@ public class Player_Stats : MonoBehaviour
             currencyText.text = "Coin count: " + GameManager.Instance.coinCount;
         }
     }
-    
+
     // Skill pointsam UI tekstas
     private void UpdateSkillUI()
     {
         if (skillText != null)
         {
-            skillText.text = "Skill points: " + GameManager.Instance.skill;
+            skillText.text = "Skill points: " + skillPoints;
         }
     }
+ 
+    public int GetCurrentDamage()
+    {
+        return attackDamage;
+    }   
 }

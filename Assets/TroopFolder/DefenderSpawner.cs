@@ -14,7 +14,7 @@ public class DefenderSpawner : MonoBehaviour
     void Start()
     {
         // Find KeyRebinder in active or inactive objects
-        keyRebinder = FindObjectOfType<KeyRebinder>(true); // true = include inactive
+        keyRebinder = Object.FindFirstObjectByType<KeyRebinder>();
 
         if (keyRebinder == null)
         {
