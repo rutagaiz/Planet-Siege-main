@@ -29,6 +29,7 @@ public class Enemy_Stats : MonoBehaviour
     [Header("PowerUps")]
     public bool isSpecial = false;
     public List<PowerUp> powerUps = new List<PowerUp>();
+    private Vector2 knockbackForce = new Vector2(5f, 5f);
 
     public void FixedUpdate()
     {
@@ -91,7 +92,8 @@ public class Enemy_Stats : MonoBehaviour
             Debug.LogWarning("HealthUI reference is null!");
         }
 
-
+        Vector2 hitDirection = transform.position.normalized;
+        rb.AddForce(hitDirection * 2, ForceMode2D.Impulse);
         
         GameObject popup = Instantiate(popUpDamagePrefab, transform.position, Quaternion.identity);
         DamagePopUp popupScript = popup.AddComponent<DamagePopUp>();
