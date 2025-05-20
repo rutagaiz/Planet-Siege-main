@@ -198,7 +198,7 @@ MonoBehaviour:
   healthBarPrefab: {fileID: 102170849489981937, guid: 7c8e3365424e1544591a18a55db02349, type: 3}
   moveSpeed: 2
   rb: {fileID: 1389573655424351393}
-  expAmount: 10
+  expAmount: 50
   isSpecial: 0
   powerUps:
   - itemPrefab: {fileID: 0}
