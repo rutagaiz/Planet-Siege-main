@@ -61,6 +61,10 @@ public class turretScript : MonoBehaviour
     [Header("PowerUps")]
     public bool isSpecial = false;
     public List<PowerUp> powerUps = new List<PowerUp>();
+    
+    // Issaugot zaidima
+    public int GetCurrentHealth() => currentHealth;
+    public bool IsDestroyed() => isDestroyed;
 
     public void Initialize() //for testing, does what start did previously but public possible call
     {
@@ -182,7 +186,7 @@ public class turretScript : MonoBehaviour
         
         if (turretFaction == TurretFaction.Enemy)
         {
-            GameManager.Instance.AddTowerDestroyed();
+            GameManager.Instance.AddTowerDestroyed(gameObject);
         }
         
         // 🧨 1. Sunaikinam visus koliderius (vaikų taip pat!)
@@ -384,5 +388,20 @@ public class turretScript : MonoBehaviour
     void ShowDefeatScreen()
     {
         GameOverScreen.Setup();
+    }
+    
+    public void SetHealth(int hp)
+    {
+        currentHealth = hp;
+        isDestroyed = (hp <= 0);
+        UpdateHealthUI();
+
+        if (isDestroyed)
+            Die(); // or call internal logic without duplicating
+    }
+    public void ForceDestroy()
+    {
+        if (!isDestroyed)
+            Die();
     }
 }

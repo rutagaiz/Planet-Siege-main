@@ -17,7 +17,14 @@ public class EnemyTracker : MonoBehaviour
         icon = iconTransform;
         minimapCamera = camera;
         minimapUI = ui;
-
+        
+        if (minimapCamera == null || minimapUI == null || icon == null || worldObject == null)
+        {
+            Debug.LogError("EnemyTracker initialization failed - null reference provided");
+            Destroy(this); // Destroy this component if initialization fails
+            return;
+        }
+        
         // Get minimap UI size
         minimapSize = minimapUI.rect.size;
 
@@ -28,13 +35,17 @@ public class EnemyTracker : MonoBehaviour
 
     void Update()
     {
-     /*   
         if (worldObject == null || icon == null || minimapCamera == null || minimapUI == null)
-        {
-            Destroy(icon.gameObject);
-            return;
-        }
-        */
+             {
+                 // Clean up if any references are lost
+                 if (icon != null)
+                 {
+                     Destroy(icon.gameObject);
+                 }
+                 Destroy(this); // Destroy this component
+                 return;
+             }
+        
         // Get world position and normalize within minimap bounds
         Vector3 worldPosition = worldObject.position;
         float normalizedX = Mathf.InverseLerp(mapStart.x, mapEnd.x, worldPosition.x);

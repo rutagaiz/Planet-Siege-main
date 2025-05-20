@@ -10,13 +10,14 @@ public class Player_Stats : MonoBehaviour
     public Slider slider;
     public Slider slider1;
     public Text currencyText;
+    public Text skillText;
+
+    //[SerializeField]
+    //public int Currency = 100;
 
     [SerializeField]
-    public int Currency = 100;
-
-    [SerializeField]
-    int currentHealth, maxHealth, currentExperience, maxExperience, currentLevel, attackDamage, Speed, skillPoints;
-
+    int currentHealth, maxHealth, maxExperience = 100, currentLevel, attackDamage, Speed, skillPoints;
+    
     public GameOverScreen GameOverScreen;
 
     private void Awake()
@@ -28,6 +29,10 @@ public class Player_Stats : MonoBehaviour
     {
         respawnPoint = transform.position;
         UpdateHealthUI();
+        UpdateXpUI();
+        UpdateCurrencyUI();
+        // Skill points UI
+        UpdateSkillUI();
         Medkit.OnMedkitCollect += TakeDamage;
     }
 
@@ -43,12 +48,14 @@ public class Player_Stats : MonoBehaviour
 
     public void HandleChange(int newCurrency, int newExperience)
     {
-        currentExperience += newExperience;
-        Currency += newCurrency;
+        GameManager.Instance.AddXP(newExperience);
+        GameManager.Instance.AddCoin(newCurrency);
         UpdateXpUI();
         UpdateCurrencyUI();
+        // Skill points UI
+        UpdateSkillUI();
 
-        if (currentExperience >= maxExperience)
+        if (GameManager.Instance.XP >= maxExperience)
         {
             LevelUp();
         }
@@ -58,7 +65,7 @@ public class Player_Stats : MonoBehaviour
     {
         skillPoints += 1;
         currentHealth = maxHealth;
-        currentExperience = 0;
+        GameManager.Instance.ResetXP();
         maxExperience += 100;
         currentLevel += 1;
         UpdateHealthUI();
@@ -106,16 +113,16 @@ public class Player_Stats : MonoBehaviour
     {
         if (slider1 != null)
         {
-            slider1.value = currentExperience;
+            slider1.value = GameManager.Instance.XP;
         }
     }
 
 
     public bool SpendCurrency(int amount)
     {
-        if (Currency >= amount)
+        if (GameManager.Instance.coinCount >= amount)
         {
-            Currency -= amount;
+            GameManager.Instance.coinCount -= amount;
             UpdateCurrencyUI();
             return true;
         }
@@ -124,15 +131,30 @@ public class Player_Stats : MonoBehaviour
 
     public void AddCurrency(int amount)
     {
-        Currency += amount;
+        GameManager.Instance.AddCoin(amount);
         UpdateCurrencyUI();
     }
-
+    
+    // Skill pointsam Add()
+    public void AddSkillPoint(int amount)
+    {
+        GameManager.Instance.AddSkill(amount);
+    }
+    
     private void UpdateCurrencyUI()
     {
         if (currencyText != null)
         {
-            currencyText.text = "Coin count: " + Currency.ToString();
+            currencyText.text = "Coin count: " + GameManager.Instance.coinCount;
+        }
+    }
+    
+    // Skill pointsam UI tekstas
+    private void UpdateSkillUI()
+    {
+        if (skillText != null)
+        {
+            skillText.text = "Skill points: " + GameManager.Instance.skill;
         }
     }
 }
