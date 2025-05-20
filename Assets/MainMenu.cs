@@ -11,6 +11,9 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
         Debug.Log("StartGame called!");
+        // Play the level 1 music
+        SoundManager.Instance.StopMenuMusic();
+        SoundManager.Instance.PlayLevel1Music();
         SceneManager.LoadScene("atsarginis");
     }
 
