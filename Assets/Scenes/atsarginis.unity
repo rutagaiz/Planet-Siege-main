@@ -1713,7 +1713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretFaction: 0
-  Range: 5
+  Range: 23
   targetTags:
   - EnemyTroop
   targetLayer:
@@ -1723,7 +1723,7 @@ MonoBehaviour:
   Bullet: {fileID: 8411451229459990027, guid: e63973cf188a02b4ebe4a71f74e6700d, type: 3}
   FireRate: 1
   ShootPoint: {fileID: 870857008}
-  maxHealth: 100
+  maxHealth: 150
   isRepairing: 0
   repairCooldown: 10
   repairDuration: 3
@@ -2125,7 +2125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretFaction: 1
-  Range: 7
+  Range: 10
   targetTags:
   - Player
   - AllyTroop
@@ -2134,9 +2134,9 @@ MonoBehaviour:
     m_Bits: 1152
   Gun: {fileID: 588014697}
   Bullet: {fileID: 516782520773423697, guid: ef777e4840cae8d46bb3849fb6d8ad3c, type: 3}
-  FireRate: 1
+  FireRate: 2
   ShootPoint: {fileID: 952432009}
-  maxHealth: 50
+  maxHealth: 65
   isRepairing: 0
   repairCooldown: 0
   repairDuration: 0
@@ -3167,7 +3167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretFaction: 0
-  Range: 5
+  Range: 10
   targetTags:
   - EnemyTroop
   targetLayer:
@@ -3175,9 +3175,9 @@ MonoBehaviour:
     m_Bits: 2048
   Gun: {fileID: 1334810469}
   Bullet: {fileID: 516782520773423697, guid: bdbb037cbbfbe4b4b9a7b3a9c69fd80f, type: 3}
-  FireRate: 1
+  FireRate: 2
   ShootPoint: {fileID: 983391030}
-  maxHealth: 50
+  maxHealth: 65
   isRepairing: 0
   repairCooldown: 10
   repairDuration: 3
@@ -3467,7 +3467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretFaction: 1
-  Range: 7
+  Range: 10
   targetTags:
   - Player
   - AllyTroop
@@ -3478,7 +3478,7 @@ MonoBehaviour:
   Bullet: {fileID: 516782520773423697, guid: f5564412b49775248bbc9ff0900cddd4, type: 3}
   FireRate: 1
   ShootPoint: {fileID: 782572676}
-  maxHealth: 50
+  maxHealth: 80
   isRepairing: 0
   repairCooldown: 0
   repairDuration: 0
@@ -4971,7 +4971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretFaction: 1
-  Range: 7
+  Range: 12
   targetTags:
   - Player
   - AllyTroop
@@ -4980,7 +4980,7 @@ MonoBehaviour:
     m_Bits: 1152
   Gun: {fileID: 2111180687}
   Bullet: {fileID: 516782520773423697, guid: 66f565aa7e8a3c846a1b1259633e0363, type: 3}
-  FireRate: 1
+  FireRate: 2
   ShootPoint: {fileID: 992399428}
   maxHealth: 50
   isRepairing: 0
@@ -18060,7 +18060,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretFaction: 0
-  Range: 5
+  Range: 12
   targetTags:
   - EnemyTroop
   targetLayer:
@@ -18068,7 +18068,7 @@ MonoBehaviour:
     m_Bits: 2048
   Gun: {fileID: 524059918}
   Bullet: {fileID: 516782520773423697, guid: 37145b0ffdc54b140be298c0c4ba86ce, type: 3}
-  FireRate: 1
+  FireRate: 2
   ShootPoint: {fileID: 732161221}
   maxHealth: 50
   isRepairing: 0
@@ -19376,7 +19376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretFaction: 1
-  Range: 10
+  Range: 23
   targetTags:
   - Player
   - AllyTroop
@@ -19387,7 +19387,7 @@ MonoBehaviour:
   Bullet: {fileID: 8411451229459990027, guid: e63973cf188a02b4ebe4a71f74e6700d, type: 3}
   FireRate: 1
   ShootPoint: {fileID: 1262855064}
-  maxHealth: 100
+  maxHealth: 150
   isRepairing: 0
   repairCooldown: 10
   repairDuration: 3
@@ -19873,7 +19873,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretFaction: 0
-  Range: 5
+  Range: 10
   targetTags:
   - EnemyTroop
   targetLayer:
@@ -19883,7 +19883,7 @@ MonoBehaviour:
   Bullet: {fileID: 516782520773423697, guid: 0a0b1720d9b91754e9c746bc38d9f4d9, type: 3}
   FireRate: 1
   ShootPoint: {fileID: 2092238315}
-  maxHealth: 50
+  maxHealth: 80
   isRepairing: 0
   repairCooldown: 10
   repairDuration: 3
